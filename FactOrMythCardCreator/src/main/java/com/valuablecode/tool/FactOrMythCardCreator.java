@@ -2,17 +2,28 @@ package com.valuablecode.tool;
 
 
 /**
- * Knows how to create a PDF of Fact or Myth cards.
+ * Knows how to create a PDF containing Fact or Myth cards.
  */
 public class FactOrMythCardCreator {
 	
+	private final DocumentProvider documentProvider;
+
+	public FactOrMythCardCreator() {
+		this(new PdfDocumentProvider());
+	}
+	
+	public FactOrMythCardCreator(DocumentProvider documentProvider) {
+		this.documentProvider = documentProvider;
+	}
+
 	public static void main(String[] args) {
 		FactOrMythCardCreator cardCreator = new FactOrMythCardCreator();
 		
 		cardCreator.create();
 	}
 
-	private void create() {
+	public void create() {
+		documentProvider.getDocument();
 	}
 
 }
