@@ -6,24 +6,19 @@ package com.valuablecode.tool;
  */
 public class FactOrMythCardCreator {
 	
-	private final DocumentProvider documentProvider;
+	private final FactOrMythCardProvider cardProvider;
+	private final FactOrMythDocument document;
 
-	public FactOrMythCardCreator() {
-		this(new PdfDocumentProvider());
-	}
-	
-	public FactOrMythCardCreator(DocumentProvider documentProvider) {
-		this.documentProvider = documentProvider;
-	}
 
-	public static void main(String[] args) {
-		FactOrMythCardCreator cardCreator = new FactOrMythCardCreator();
-		
-		cardCreator.create();
+	public FactOrMythCardCreator(FactOrMythCardProvider cardProvider, FactOrMythDocument document) {
+		this.cardProvider = cardProvider;
+		this.document = document;
 	}
 
-	public void create() {
-		documentProvider.getDocument();
+	public void createCards() {
+		for (FactOrMythCard card : cardProvider.getCards()) {
+			document.addCard(card);
+		}
 	}
 
 }
