@@ -27,7 +27,7 @@ public class FactOrMythCardCreatorTest {
 
 	@Test public void
 	add_single_fact_or_myth_card_to_the_document() {
-		FactOrMythCard card = new FactOrMythCard("");
+		FactOrMythCard card = aCard("");
 		
 		when(cardProvider.getCards()).thenReturn(singletonList(card));
 
@@ -38,9 +38,9 @@ public class FactOrMythCardCreatorTest {
 
 	@Test public void
 	add_multiple_fact_or_myth_card_to_the_document() {
-		FactOrMythCard card1 = new FactOrMythCard("1");
-		FactOrMythCard card2 = new FactOrMythCard("2");
-		FactOrMythCard card3 = new FactOrMythCard("3");
+		FactOrMythCard card1 = aCard("1");
+		FactOrMythCard card2 = aCard("2");
+		FactOrMythCard card3 = aCard("3");
 		
 		when(cardProvider.getCards()).thenReturn(asList(card1, card2, card3));
 
@@ -50,6 +50,10 @@ public class FactOrMythCardCreatorTest {
 		verify(document).addCard(card1);
 		verify(document).addCard(card2);
 		verify(document).addCard(card3);
+	}
+	
+	private static FactOrMythCard aCard(String cardText) {
+		return new FactOrMythCard(cardText);
 	}
 
 }
