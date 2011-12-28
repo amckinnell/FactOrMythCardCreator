@@ -19,7 +19,7 @@ public class FactOrMythCardCreatorTest {
 	
 	
 	@Test public void
-	nothing_to_do_when_there_are_no_fact_or_myth_cards() {
+	do_nothing_when_there_are_no_fact_or_myth_cards() {
 		when(cardProvider.getCards()).thenReturn(Collections.<FactOrMythCard>emptyList());
 
 		sut.createCards();
