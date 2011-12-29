@@ -8,6 +8,9 @@ import com.itextpdf.text.FontFactory;
  */
 public class HardCodedCardFormat implements CardFormat {
 	
+	// The safest choice is to embed the font in the document.
+	private static final boolean EMBED_FONT_IN_DOCUMENT = true;
+
 	// Hard coded fully qualified path to the card font.
 	private static final String CARD_FONT_PATH = "/Library/Fonts/Noteworthy.ttc";
 	
@@ -33,7 +36,7 @@ public class HardCodedCardFormat implements CardFormat {
 	private Font lookupFont(String fontName) {
         FontFactory.register(CARD_FONT_PATH);
         
-		return FontFactory.getFont(fontName, FontFactory.defaultEncoding, false);
+		return FontFactory.getFont(fontName, FontFactory.defaultEncoding, EMBED_FONT_IN_DOCUMENT);
 	}
 
 }
