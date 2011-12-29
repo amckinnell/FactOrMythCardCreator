@@ -20,6 +20,8 @@ public class FactOrMythCardCreator {
 		for (FactOrMythCard card : cardsToCreate()) {
 			document.addCard(card);
 		}
+		
+		document.close();
 	}
 
 	private List<FactOrMythCard> cardsToCreate() {
@@ -33,3 +35,4 @@ public class FactOrMythCardCreator {
 	}
 
 }
+
