@@ -9,7 +9,6 @@ public class FactOrMythCardCreator {
 	private final FactOrMythCardProvider cardProvider;
 	private final FactOrMythDocument document;
 
-
 	public FactOrMythCardCreator(FactOrMythCardProvider cardProvider, FactOrMythDocument document) {
 		this.cardProvider = cardProvider;
 		this.document = document;
