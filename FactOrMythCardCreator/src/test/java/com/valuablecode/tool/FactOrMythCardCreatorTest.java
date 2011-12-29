@@ -2,6 +2,9 @@ package com.valuablecode.tool;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
+import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,10 +22,15 @@ public class FactOrMythCardCreatorTest {
 	
 	
 	@Test public void
-	do_nothing_when_there_are_no_fact_or_myth_cards() {
+	fail_when_there_are_no_fact_or_myth_cards() {
 		when(cardProvider.getCards()).thenReturn(Collections.<FactOrMythCard>emptyList());
-
-		sut.createCards();
+		
+		try {
+			sut.createCards();
+			fail("Expected to fail when there are no cards to create");
+		} catch (RuntimeException expected) {
+			assertThat(expected.getMessage(), containsString("No cards to create"));
+		}
 	}
 
 	@Test public void
