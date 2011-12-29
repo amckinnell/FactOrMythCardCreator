@@ -27,7 +27,7 @@ public class HardCodedCardFormat implements CardFormat {
 	private Font initializeCardFont() {
         Font result = lookupFont("noteworthy-bold");
         
-        result.setSize(14f);
+        result.setSize(24f);
         result.setStyle(Font.NORMAL);
         
 		return result;
