@@ -4,7 +4,7 @@ public class FactOrMythCardDriver {
 
 	public static void main(String[] args) {
 		FactOrMythCardProvider cardProvider = new HardCodedCardProvider();
-		FactOrMythDocument document = new PdfFactOrMythDocument();
+		FactOrMythDocument document = new IndexCardLayout();
 		
 		FactOrMythCardCreator cardCreator = new FactOrMythCardCreator(cardProvider, document);
 		

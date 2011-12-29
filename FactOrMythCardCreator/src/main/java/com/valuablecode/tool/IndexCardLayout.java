@@ -15,10 +15,16 @@ import com.itextpdf.text.pdf.PdfWriter;
 /**
  * Allows cards to be added to a PDF document suitable for printing to index cards.
  */
-public class PdfFactOrMythDocument implements FactOrMythDocument {
+public class IndexCardLayout implements FactOrMythDocument {
 	
-	private static final Rectangle INDEX_CARD = new Rectangle(5 * 72, 3 * 72);
-	private static final String RESULT_PDF = "/Users/alistair/Desktop/TableResearch.pdf";
+	//  Multiply by 72 to convert from inches to points.
+	private static final int POINTS_PER_INCH = 72;
+
+	// Index cards are 3 by 5 inches.
+	private static final Rectangle INDEX_CARD_SIZE = new Rectangle(5 * POINTS_PER_INCH, 3 * POINTS_PER_INCH);
+	
+	// Hard coded path to the result PDF.
+	private static final String RESULT_PDF = "/Users/alistair/Desktop/IndexCards.pdf";
 
 	private Document document;
 
@@ -74,7 +80,7 @@ public class PdfFactOrMythDocument implements FactOrMythDocument {
 	}
 
 	private Document initializeDocument() {
-		Document document = new Document(INDEX_CARD, 0f, 0f, 0f, 0f);
+		Document document = new Document(INDEX_CARD_SIZE, 0f, 0f, 0f, 0f);
 
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream(RESULT_PDF));
