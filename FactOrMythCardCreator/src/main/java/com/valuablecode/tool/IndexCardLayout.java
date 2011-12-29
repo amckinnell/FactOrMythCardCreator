@@ -27,8 +27,13 @@ public class IndexCardLayout implements FactOrMythDocument {
 	private static final String RESULT_PDF = "/Users/alistair/Desktop/IndexCards.pdf";
 
 	private Document document;
+	private final CardFormat cardFormat;
 
 
+	public IndexCardLayout() {
+		this.cardFormat = new HardCodedCardFormat();
+	}
+	
 	public void close() {
 		if (null == document) {
 			throw new RuntimeException("Can't close document without first adding a card.");
@@ -38,7 +43,7 @@ public class IndexCardLayout implements FactOrMythDocument {
 	}
 
 	public void addCard(FactOrMythCard card) {
-		guaranteeThatDocumentInitialized();
+		guaranteeThatDocumentIsInitialized();
 		
 		addCardLayoutToDocument(createCardLayout(card));
 	}
@@ -61,7 +66,7 @@ public class IndexCardLayout implements FactOrMythDocument {
 	}
 
 	private PdfPCell createLayoutCell(FactOrMythCard card) {
-		PdfPCell result = new PdfPCell(new Phrase(card.getCardText()));
+		PdfPCell result = new PdfPCell(new Phrase(card.getCardText(), cardFormat.getFont()));
 		
 		result.setBorder(Rectangle.NO_BORDER);
 		result.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -71,7 +76,7 @@ public class IndexCardLayout implements FactOrMythDocument {
 		return result;
 	}
 
-	private void guaranteeThatDocumentInitialized() {
+	private void guaranteeThatDocumentIsInitialized() {
 		if (null == document) {
 			document = initializeDocument();
 			
