@@ -12,8 +12,9 @@ public class HardCodedCardProvider implements FactOrMythCardProvider {
 	private List<FactOrMythCard> cards = new ArrayList<FactOrMythCard>();
 	
 	public HardCodedCardProvider() {
-		createCard("Fact or Myth Card 1");
-		createCard("Fact or Myth Card 2");
+		createCard("Fact or Myth Card One");
+		createCard("Fact or Myth Card Two\n(With A Second Line)");
+		createCard("Fact or Myth Card Two\n(With A Second Line\nand Third Line)");
 	}
 
 	private void createCard(String cardText) {
