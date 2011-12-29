@@ -10,13 +10,13 @@ public class PdfFactOrMythDocumentTest {
 
 	@Test public void
 	fail_when_close_called_prior_to_adding_a_card() {
-		 PdfFactOrMythDocument sut = new PdfFactOrMythDocument();
+		FactOrMythDocument sut = new PdfFactOrMythDocument();
 		 
 		 try {
 			sut.close(); 
 			fail("Expected to fail when close called prior to adding a card");
 		} catch (Exception expected) {
-			assertThat(expected.getMessage(), containsString("Can't call close without first adding a card."));
+			assertThat(expected.getMessage(), containsString("Can't close document without first adding a card."));
 		}
 		
 	}
