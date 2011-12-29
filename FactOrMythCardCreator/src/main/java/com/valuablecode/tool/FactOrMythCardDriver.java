@@ -3,8 +3,10 @@ package com.valuablecode.tool;
 public class FactOrMythCardDriver {
 
 	public static void main(String[] args) {
-		FactOrMythCardCreator cardCreator = new FactOrMythCardCreator(new HardCodedCardProvider(), 
-				new PdfFactOrMythDocument());
+		FactOrMythCardProvider cardProvider = new HardCodedCardProvider();
+		FactOrMythDocument document = new PdfFactOrMythDocument();
+		
+		FactOrMythCardCreator cardCreator = new FactOrMythCardCreator(cardProvider, document);
 		
 		cardCreator.createCards();
 	}
