@@ -1,12 +1,89 @@
 package com.valuablecode.tool;
 
+import java.io.FileOutputStream;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 
 /**
- * Knows how to provide a configured PDF document.
+ * Allows cards to be added to a PDF document suitable for printing to index cards.
  */
 public class PdfFactOrMythDocument implements FactOrMythDocument {
+	
+	private static final Rectangle INDEX_CARD = new Rectangle(5 * 72, 3 * 72);
+	private static final String RESULT_PDF = "/Users/alistair/Desktop/TableResearch.pdf";
+
+	private Document document;
+
+
+	public void close() {
+		if (null == document) {
+			throw new RuntimeException("Can't close document without first adding a card.");
+		}
+
+		document.close();
+	}
 
 	public void addCard(FactOrMythCard card) {
+		guaranteeThatDocumentInitialized();
+		
+		addCardLayoutToDocument(createCardLayout(card));
+	}
+
+	private void addCardLayoutToDocument(Element layout) {
+		try {
+			document.add(layout);
+			document.newPage();
+		} catch (DocumentException e) {
+			throw new RuntimeException("Can't layout card", e);
+		}
+	}
+
+	private Element createCardLayout(FactOrMythCard card) {
+		PdfPTable result = new PdfPTable(1);
+		
+		result.addCell(createLayoutCell(card));
+	
+		return result;
+	}
+
+	private PdfPCell createLayoutCell(FactOrMythCard card) {
+		PdfPCell result = new PdfPCell(new Phrase(card.getCardText()));
+		
+		result.setBorder(Rectangle.NO_BORDER);
+		result.setHorizontalAlignment(Element.ALIGN_CENTER);
+		result.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		result.setFixedHeight(document.getPageSize().getHeight());
+
+		return result;
+	}
+
+	private void guaranteeThatDocumentInitialized() {
+		if (null == document) {
+			document = initializeDocument();
+			
+			document.open();
+		}
+	}
+
+	private Document initializeDocument() {
+		Document document = new Document(INDEX_CARD, 0f, 0f, 0f, 0f);
+
+		try {
+			PdfWriter.getInstance(document, new FileOutputStream(RESULT_PDF));
+		} catch (Exception e) {
+			throw new RuntimeException("Unable to initialize document", e);
+		}
+		
+		return document;
 	}
 
 }
+
