@@ -107,9 +107,15 @@ public class PdfFactOrMythLayout implements FactOrMythLayout {
 		result.setBorder(Rectangle.NO_BORDER);
 		result.setHorizontalAlignment(Element.ALIGN_CENTER);
 		result.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		result.setFixedHeight(document.getPageSize().getHeight() / pageLayout.getCardsPerColumn());
+		result.setFixedHeight(getCardHeight());
 
 		return result;
+	}
+
+	private float getCardHeight() {
+		int cardsPerColumn = pageLayout.getCardsPerPage() / pageLayout.getColumnsPerPage();
+		
+		return document.getPageSize().getHeight() / cardsPerColumn;
 	}
 
 	private void guaranteeThatDocumentIsInitialized() {

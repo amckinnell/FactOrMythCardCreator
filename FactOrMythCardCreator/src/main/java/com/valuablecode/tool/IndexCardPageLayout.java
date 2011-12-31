@@ -9,7 +9,6 @@ public class IndexCardPageLayout implements PageLayout {
 
 	private final int cardsPerPage = 1;
 	private final int columnsPerPage = 1;
-	private final int cardsPerColumn = cardsPerPage / columnsPerPage;
 
 	//  Multiply by 72 to convert from inches to points.
 	private static final int POINTS_PER_INCH = 72;
@@ -17,10 +16,6 @@ public class IndexCardPageLayout implements PageLayout {
 	// Index cards are 3 by 5 inches.
 	private final Rectangle pageSize = new Rectangle(5 * POINTS_PER_INCH, 3 * POINTS_PER_INCH);
 
-
-	public int getCardsPerColumn() {
-		return cardsPerColumn;
-	}
 
 	public int getCardsPerPage() {
 		return cardsPerPage;

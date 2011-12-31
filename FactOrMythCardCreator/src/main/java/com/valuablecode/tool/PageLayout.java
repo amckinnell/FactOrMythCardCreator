@@ -4,9 +4,6 @@ import com.itextpdf.text.Rectangle;
 
 public interface PageLayout {
 	
-	// We're going to layout this many cards in each column.
-	int getCardsPerColumn();
-	
 	// We're going to layout this many cards on each page.
 	int getCardsPerPage();
 
