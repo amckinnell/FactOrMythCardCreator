@@ -13,10 +13,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 
 /**
- * Allows cards to be added to a PDF document suitable for printing to regular pages. 
- * Note: several cards will appear on each page.
+ * Allows cards to be added to a PDF layout suitable for printing. 
  */
-public class FactOrMythPdfDocument implements FactOrMythDocument {
+public class PdfFactOrMythLayout implements FactOrMythLayout {
 	
 	// Hard coded path to the output PDF.
 	private static final String OUTPUT_PDF = "/Users/alistair/Desktop/FactOrMyth.pdf";
@@ -25,7 +24,7 @@ public class FactOrMythPdfDocument implements FactOrMythDocument {
 	private final CardFormat cardFormat;
 	private final PageLayout pageLayout;
 
-	// Wrap the document.
+	// Wrap the layout.
 	private Document document;
 
 	// Used to control the card layout on the current page.
@@ -35,7 +34,7 @@ public class FactOrMythPdfDocument implements FactOrMythDocument {
 	private int cardCount;
 	
 
-	public FactOrMythPdfDocument(PageLayout pageLayout) {
+	public PdfFactOrMythLayout(PageLayout pageLayout) {
 		this.pageLayout = pageLayout;
 		this.cardFormat = new HardCodedCardFormat();
 		
@@ -44,7 +43,7 @@ public class FactOrMythPdfDocument implements FactOrMythDocument {
 	
 	public void close() {
 		if (null == document) {
-			throw new RuntimeException("Can't close document without first adding a card.");
+			throw new RuntimeException("Can't close layout without first adding a card.");
 		}
 		
 		handleIncompletePage();
@@ -127,7 +126,7 @@ public class FactOrMythPdfDocument implements FactOrMythDocument {
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream(OUTPUT_PDF));
 		} catch (Exception e) {
-			throw new RuntimeException("Unable to initialize document", e);
+			throw new RuntimeException("Unable to initialize layout", e);
 		}
 		
 		return document;

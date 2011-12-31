@@ -8,7 +8,7 @@ import com.itextpdf.text.FontFactory;
  */
 public class HardCodedCardFormat implements CardFormat {
 	
-	// The safest choice is to embed the font in the document.
+	// The safest choice is to embed the font in the layout.
 	private static final boolean EMBED_FONT_IN_DOCUMENT = true;
 
 	// Hard coded fully qualified path to the card font.

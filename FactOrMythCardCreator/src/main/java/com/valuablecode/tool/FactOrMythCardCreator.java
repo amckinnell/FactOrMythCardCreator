@@ -9,19 +9,19 @@ import java.util.List;
 public class FactOrMythCardCreator {
 	
 	private final FactOrMythCardProvider cardProvider;
-	private final FactOrMythDocument document;
+	private final FactOrMythLayout layout;
 
-	public FactOrMythCardCreator(FactOrMythCardProvider cardProvider, FactOrMythDocument document) {
+	public FactOrMythCardCreator(FactOrMythCardProvider cardProvider, FactOrMythLayout layout) {
 		this.cardProvider = cardProvider;
-		this.document = document;
+		this.layout = layout;
 	}
 
 	public void createCards() {
 		for (FactOrMythCard card : cardsToCreate()) {
-			document.addCard(card);
+			layout.addCard(card);
 		}
 		
-		document.close();
+		layout.close();
 	}
 
 	private List<FactOrMythCard> cardsToCreate() {

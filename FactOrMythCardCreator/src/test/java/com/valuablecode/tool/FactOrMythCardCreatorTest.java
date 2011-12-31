@@ -16,9 +16,9 @@ import org.junit.Test;
 public class FactOrMythCardCreatorTest {
 	
 	final FactOrMythCardProvider cardProvider = mock(FactOrMythCardProvider.class);
-	final FactOrMythDocument document = mock(FactOrMythDocument.class); 
+	final FactOrMythLayout layout = mock(FactOrMythLayout.class); 
 	
-	final FactOrMythCardCreator sut = new FactOrMythCardCreator(cardProvider, document);
+	final FactOrMythCardCreator sut = new FactOrMythCardCreator(cardProvider, layout);
 	
 	
 	@Test public void
@@ -41,8 +41,8 @@ public class FactOrMythCardCreatorTest {
 
 		sut.createCards();
 		
-		verify(document).addCard(card);
-		verify(document).close();
+		verify(layout).addCard(card);
+		verify(layout).close();
 	}
 
 	@Test public void
@@ -56,11 +56,11 @@ public class FactOrMythCardCreatorTest {
 		sut.createCards();
 		
 		// TODO [FactOrMythCards] AM Dec 28, 2011: How do we assert that we call in the correct order?
-		verify(document).addCard(card1);
-		verify(document).addCard(card2);
-		verify(document).addCard(card3);
+		verify(layout).addCard(card1);
+		verify(layout).addCard(card2);
+		verify(layout).addCard(card3);
 
-		verify(document).close();
+		verify(layout).close();
 	}
 	
 	private static FactOrMythCard aCard(String cardText) {
