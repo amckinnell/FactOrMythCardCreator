@@ -6,11 +6,11 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 
 import org.junit.Test;
 
-public class IndexCardLayoutTest {
+public class FactOrMythPdfDocumentTest {
 
 	@Test public void
 	fail_when_close_called_prior_to_adding_a_card() {
-		FactOrMythDocument sut = new IndexCardLayout();
+		FactOrMythDocument sut = new FactOrMythPdfDocument(new LetterPageLayout());
 		 
 		 try {
 			sut.close(); 

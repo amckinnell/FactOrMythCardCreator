@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -17,33 +16,27 @@ import com.itextpdf.text.pdf.PdfWriter;
  * Allows cards to be added to a PDF document suitable for printing to regular pages. 
  * Note: several cards will appear on each page.
  */
-public class PagedLayout implements FactOrMythDocument {
+public class FactOrMythPdfDocument implements FactOrMythDocument {
 	
-	// We're going to layout this many cards on each page.
-	private static final int CARDS_PER_PAGE = 6;
+	// Hard coded path to the output PDF.
+	private static final String OUTPUT_PDF = "/Users/alistair/Desktop/FactOrMyth.pdf";
 
-	// We're going to layout the cards in this many columns on each page.
-	private static final int COLUMNS_PER_PAGE = 2;
-
-	// We're going to layout this many cards in each column.
-	private static final int CARDS_PER_COLUMN = CARDS_PER_PAGE / COLUMNS_PER_PAGE;
-
-	// Use US Letter at the page size.
-	private static final Rectangle PAGED_SIZE = PageSize.LETTER;
-	
-	// Hard coded path to the result PDF.
-	private static final String RESULT_PDF = "/Users/alistair/Desktop/Paged.pdf";
-
-	private Document document;
+	// Collaborators
 	private final CardFormat cardFormat;
+	private final PageLayout pageLayout;
+
+	// Wrap the document.
+	private Document document;
+
+	// Used to control the card layout on the current page.
+	private PdfPTable layoutTable;
 
 	// The count of cards that we've added to the current page.
 	private int cardCount;
 	
-	// Used to control the card layout on the current page.
-	private PdfPTable layoutTable;
 
-	public PagedLayout() {
+	public FactOrMythPdfDocument(PageLayout pageLayout) {
+		this.pageLayout = pageLayout;
 		this.cardFormat = new HardCodedCardFormat();
 		
 		initializeSinglePageLayout();
@@ -68,7 +61,7 @@ public class PagedLayout implements FactOrMythDocument {
 	}
 
 	private void handleIncompleteColumn() {
-		if (0 == cardCount % COLUMNS_PER_PAGE) return;
+		if (0 == cardCount % pageLayout.getColumnsPerPage()) return;
 		
 		layoutTable.addCell(createEmptyCard());
 	}
@@ -87,14 +80,14 @@ public class PagedLayout implements FactOrMythDocument {
 		layoutTable.addCell(layout);
 		cardCount += 1;
 		
-		if (CARDS_PER_PAGE == cardCount) {
+		if (pageLayout.getCardsPerPage() == cardCount) {
 			emitSinglePage();
 			initializeSinglePageLayout();
 		}
 	}
 
 	private void initializeSinglePageLayout() {
-		layoutTable = new PdfPTable(COLUMNS_PER_PAGE);
+		layoutTable = new PdfPTable(pageLayout.getColumnsPerPage());
 		layoutTable.setWidthPercentage(100f);
 		
 		cardCount = 0;
@@ -115,7 +108,7 @@ public class PagedLayout implements FactOrMythDocument {
 		result.setBorder(Rectangle.NO_BORDER);
 		result.setHorizontalAlignment(Element.ALIGN_CENTER);
 		result.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		result.setFixedHeight(document.getPageSize().getHeight() / CARDS_PER_COLUMN);
+		result.setFixedHeight(document.getPageSize().getHeight() / pageLayout.getCardsPerColumn());
 
 		return result;
 	}
@@ -129,10 +122,10 @@ public class PagedLayout implements FactOrMythDocument {
 	}
 
 	private Document initializeDocument() {
-		Document document = new Document(PAGED_SIZE, 0f, 0f, 0f, 0f);
+		Document document = new Document(pageLayout.getPageSize(), 0f, 0f, 0f, 0f);
 
 		try {
-			PdfWriter.getInstance(document, new FileOutputStream(RESULT_PDF));
+			PdfWriter.getInstance(document, new FileOutputStream(OUTPUT_PDF));
 		} catch (Exception e) {
 			throw new RuntimeException("Unable to initialize document", e);
 		}
