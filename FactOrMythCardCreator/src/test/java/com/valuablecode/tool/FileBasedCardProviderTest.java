@@ -3,6 +3,7 @@ package com.valuablecode.tool;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static org.junit.matchers.JUnitMatchers.both;
 import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -53,7 +54,8 @@ public class FileBasedCardProviderTest {
 			new FileBasedCardProvider(invalidCardSourceFileName); 
 			fail("Expected to fail to find the card source file");
 		} catch (RuntimeException expected) {
-			assertThat(expected.getMessage(), containsString(invalidCardSourceFileName)); 
+			assertThat(expected.getMessage(), both(containsString("Can't find Fact or Myth file"))
+					.and(containsString(invalidCardSourceFileName))); 
 		}
 	}
 
@@ -70,7 +72,8 @@ public class FileBasedCardProviderTest {
 		} catch (IOException e) {
 			fail("The IO Exception should have been transformed to a RuntimeException");
 		} catch (RuntimeException expected) {
-			assertThat(expected.getMessage(), containsString(invalidCardSourceFileName)); 
+			assertThat(expected.getMessage(), both(containsString("Can't read Fact or Myth phrases from"))
+					.and(containsString(invalidCardSourceFileName))); 
 		}
 	}
 
