@@ -17,6 +17,10 @@ public class FileBasedCardProvider implements FactOrMythCardProvider {
 	private List<FactOrMythCard> cards = new ArrayList<FactOrMythCard>();
 	
 
+	public FileBasedCardProvider(FactOrMythConfiguration configuration) {
+		this(configuration.getCardSourceFileName());
+	}
+
 	public FileBasedCardProvider(String cardSourceFileName) {
 		this(cardSourceFileName, initializeCardSource(cardSourceFileName));
 	}

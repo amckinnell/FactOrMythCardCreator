@@ -12,27 +12,28 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.valuablecode.tool.CardFormat;
 import com.valuablecode.tool.FactOrMythCard;
+import com.valuablecode.tool.FactOrMythConfiguration;
 import com.valuablecode.tool.FactOrMythDocument;
 import com.valuablecode.tool.PageLayout;
 
 public class PdfFactOrMythDocument implements FactOrMythDocument {
 	
-	// Hard coded path to the output PDF.
-	private static final String OUTPUT_PDF = "/Users/alistair/Desktop/FactOrMyth.pdf";
-
+	// Values taken from the Fact or Myth configuration.
 	private final CardFormat cardFormat;
+	private final String outputFileName;
 	private final PageLayout pageLayout;
 
-	// The underlying PDF document.
+	// The underlying PDF document that we're writing to.
 	private Document document;
 
-	// Used to control the card layout on the current page.
+	// Used to control the card layout on the current page by defining a layout grid.
 	private PdfPTable pageTable;
 
 
-	public PdfFactOrMythDocument(PageLayout pageLayout, CardFormat cardFormat) {
-		this.pageLayout = pageLayout;
-		this.cardFormat = cardFormat;
+	public PdfFactOrMythDocument(FactOrMythConfiguration configuration) {
+		this.outputFileName = configuration.getOutputFileName();
+		this.pageLayout = configuration.getPageLayout();
+		this.cardFormat = configuration.getCardFormat();
 		
 		initializePage();
 	}
@@ -75,7 +76,7 @@ public class PdfFactOrMythDocument implements FactOrMythDocument {
 		Document document = new Document(pageLayout.getPageSize(), 0f, 0f, 0f, 0f);
 
 		try {
-			PdfWriter.getInstance(document, new FileOutputStream(OUTPUT_PDF));
+			PdfWriter.getInstance(document, new FileOutputStream(outputFileName));
 		} catch (Exception e) {
 			throw new RuntimeException("Unable to initialize layout", e);
 		}

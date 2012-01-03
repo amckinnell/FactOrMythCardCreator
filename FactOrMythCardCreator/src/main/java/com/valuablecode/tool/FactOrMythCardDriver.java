@@ -2,15 +2,13 @@ package com.valuablecode.tool;
 
 public class FactOrMythCardDriver {
 
-	// Hard coded path to the source of the Fact or Myth phrases.
-	private static final String CARD_SOURCE = "/Users/alistair/Desktop/FactOrMyths.txt";
-	
-	
 	public static void main(String[] args) {
-		FactOrMythCardProvider cardProvider = new FileBasedCardProvider(CARD_SOURCE);
-		FactOrMythLayout document = new PdfFactOrMythLayout(new LetterPageLayout());
+		FactOrMythConfiguration configuration = new HardCodedFactOrMythConfiguration();
 		
-		FactOrMythCardCreator cardCreator = new FactOrMythCardCreator(cardProvider, document);
+		FactOrMythCardProvider cardProvider = new FileBasedCardProvider(configuration);
+		FactOrMythLayout target = new PdfFactOrMythLayout(configuration);
+		
+		FactOrMythCardCreator cardCreator = new FactOrMythCardCreator(cardProvider, target);
 		
 		cardCreator.createCards();
 	}

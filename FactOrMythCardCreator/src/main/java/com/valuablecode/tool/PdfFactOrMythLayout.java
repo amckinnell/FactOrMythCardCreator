@@ -1,6 +1,5 @@
 package com.valuablecode.tool;
 
-import com.valuablecode.tool.itext.HardCodedCardFormat;
 import com.valuablecode.tool.itext.PdfFactOrMythDocument;
 
 
@@ -16,8 +15,8 @@ public class PdfFactOrMythLayout implements FactOrMythLayout {
 	private int cardCount = 0;
 	
 
-	public PdfFactOrMythLayout(PageLayout pageLayout) {
-		this(pageLayout, new PdfFactOrMythDocument(pageLayout, new HardCodedCardFormat()));
+	public PdfFactOrMythLayout(FactOrMythConfiguration configuration) {
+		this(configuration.getPageLayout(), new PdfFactOrMythDocument(configuration));
 	}
 	
 	public PdfFactOrMythLayout(PageLayout pageLayout, FactOrMythDocument pdfDocument) {
