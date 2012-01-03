@@ -1,4 +1,4 @@
-package com.valuablecode.tool;
+package com.valuablecode.tool.itext;
 
 import java.io.FileOutputStream;
 
@@ -10,6 +10,10 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.valuablecode.tool.CardFormat;
+import com.valuablecode.tool.FactOrMythCard;
+import com.valuablecode.tool.FactOrMythDocument;
+import com.valuablecode.tool.PageLayout;
 
 public class PdfFactOrMythDocument implements FactOrMythDocument {
 	

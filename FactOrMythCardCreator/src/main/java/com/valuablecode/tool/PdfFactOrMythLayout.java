@@ -1,5 +1,8 @@
 package com.valuablecode.tool;
 
+import com.valuablecode.tool.itext.HardCodedCardFormat;
+import com.valuablecode.tool.itext.PdfFactOrMythDocument;
+
 
 /**
  * Allows cards to be added to a PDF layout suitable for printing. 

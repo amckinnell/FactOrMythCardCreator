@@ -1,7 +1,8 @@
-package com.valuablecode.tool;
+package com.valuablecode.tool.itext;
 
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.valuablecode.tool.CardFormat;
 
 /**
  * Knows the font to use for displaying each Fact or Myth phrase.
