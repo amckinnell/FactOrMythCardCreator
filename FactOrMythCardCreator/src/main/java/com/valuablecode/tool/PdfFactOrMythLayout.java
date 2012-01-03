@@ -60,7 +60,7 @@ public class PdfFactOrMythLayout implements FactOrMythLayout {
 	private void handleIncompleteColumn() {
 		if (isCompleteColumn()) return;
 		
-		document.addCard(new FactOrMythCard(""));
+		document.addCard(FactOrMythCard.aBlankCard);
 	}
 
 	private boolean isCompleteColumn() {

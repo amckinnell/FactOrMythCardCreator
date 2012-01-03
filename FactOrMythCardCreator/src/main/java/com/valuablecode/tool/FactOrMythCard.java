@@ -5,6 +5,8 @@ package com.valuablecode.tool;
  */
 public class FactOrMythCard {
 	
+	public static final FactOrMythCard aBlankCard = new FactOrMythCard("");
+	
 	private final String cardText;
 	
 	public String getCardText() {
