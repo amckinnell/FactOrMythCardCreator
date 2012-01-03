@@ -13,4 +13,7 @@ public interface PageLayout {
 	// We're going to layout cards using this page size.
 	Rectangle getPageSize();
 
+	// Each card has this height.
+	float getCardHeight();
+
 }

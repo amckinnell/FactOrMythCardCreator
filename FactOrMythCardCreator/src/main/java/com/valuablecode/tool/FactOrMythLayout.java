@@ -6,6 +6,6 @@ package com.valuablecode.tool;
 public interface FactOrMythLayout {
 
 	void addCard(FactOrMythCard card);
-	void close();
+	void complete();
 
 }

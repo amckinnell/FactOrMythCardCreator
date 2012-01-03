@@ -1,28 +1,23 @@
 package com.valuablecode.tool;
 
+import static com.itextpdf.text.Utilities.inchesToPoints;
+
 import com.itextpdf.text.Rectangle;
 
 /**
  * Defines the page layout for US Letter paper.
  */
-public class LetterPageLayout implements PageLayout {
-
-	private final int cardsPerPage = 6;
-	private final int columnsPerPage = 2;
-
-	//  Multiply by 72 to convert from inches to points.
-	private static final int POINTS_PER_INCH = 72;
+public class LetterPageLayout extends BasePageLayout {
 
 	// US Letter pages are 8.5 by 11 inches.
-	private final Rectangle pageSize = new Rectangle(11.5f * POINTS_PER_INCH, 8 * POINTS_PER_INCH);
-
+	private final static Rectangle pageSize = new Rectangle(inchesToPoints(11.5f), inchesToPoints(8));
 
 	public int getCardsPerPage() {
-		return cardsPerPage;
+		return 6;
 	}
 
 	public int getColumnsPerPage() {
-		return columnsPerPage;
+		return 2;
 	}
 
 	public Rectangle getPageSize() {

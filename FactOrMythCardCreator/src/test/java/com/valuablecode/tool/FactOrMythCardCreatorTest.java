@@ -42,7 +42,7 @@ public class FactOrMythCardCreatorTest {
 		sut.createCards();
 		
 		verify(layout).addCard(card);
-		verify(layout).close();
+		verify(layout).complete();
 	}
 
 	@Test public void
@@ -60,7 +60,7 @@ public class FactOrMythCardCreatorTest {
 		verify(layout).addCard(card2);
 		verify(layout).addCard(card3);
 
-		verify(layout).close();
+		verify(layout).complete();
 	}
 	
 	private static FactOrMythCard aCard(String cardText) {

@@ -21,7 +21,7 @@ public class FactOrMythCardCreator {
 			layout.addCard(card);
 		}
 		
-		layout.close();
+		layout.complete();
 	}
 
 	private List<FactOrMythCard> cardsToCreate() {
