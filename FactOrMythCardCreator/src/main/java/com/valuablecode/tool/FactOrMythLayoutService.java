@@ -5,7 +5,7 @@ package com.valuablecode.tool;
  * 
  * Note: the client code must indicate when they are finished adding cards by invoking the complete() method.
  */
-public interface FactOrMythLayout {
+public interface FactOrMythLayoutService {
 
 	void addCard(FactOrMythCard card);
 	void complete();

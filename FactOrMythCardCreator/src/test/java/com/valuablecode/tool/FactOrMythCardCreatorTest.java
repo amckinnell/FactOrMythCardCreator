@@ -21,11 +21,11 @@ public class FactOrMythCardCreatorTest {
 	final FactOrMythCard card_3 = new FactOrMythCard("card.3");
 	
 	final FactOrMythCardProvider cardProvider = mock(FactOrMythCardProvider.class);
-	final FactOrMythLayout layout = mock(FactOrMythLayout.class);
+	final FactOrMythLayoutService layoutService = mock(FactOrMythLayoutService.class);
 	
-	final FactOrMythCardCreator sut = new FactOrMythCardCreator(cardProvider, layout);
+	final FactOrMythCardCreator sut = new FactOrMythCardCreator(cardProvider, layoutService);
 	
-	final InOrder inOrder = Mockito.inOrder(layout);
+	final InOrder inOrder = Mockito.inOrder(layoutService);
 
 	
 	@Test public void
@@ -46,8 +46,8 @@ public class FactOrMythCardCreatorTest {
 
 		sut.createCards();
 		
-		inOrder.verify(layout).addCard(card_1);
-		inOrder.verify(layout).complete();
+		inOrder.verify(layoutService).addCard(card_1);
+		inOrder.verify(layoutService).complete();
 	}
 
 	@Test public void
@@ -56,11 +56,11 @@ public class FactOrMythCardCreatorTest {
 
 		sut.createCards();
 		
-		inOrder.verify(layout).addCard(card_1);
-		inOrder.verify(layout).addCard(card_2);
-		inOrder.verify(layout).addCard(card_3);
+		inOrder.verify(layoutService).addCard(card_1);
+		inOrder.verify(layoutService).addCard(card_2);
+		inOrder.verify(layoutService).addCard(card_3);
 
-		inOrder.verify(layout).complete();
+		inOrder.verify(layoutService).complete();
 	}
 
 }

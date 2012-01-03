@@ -6,9 +6,9 @@ public class FactOrMythCardDriver {
 		FactOrMythConfiguration configuration = new HardCodedFactOrMythConfiguration();
 		
 		FactOrMythCardProvider cardProvider = new FileBasedCardProvider(configuration);
-		FactOrMythLayout target = new PdfFactOrMythLayout(configuration);
+		FactOrMythLayoutService layoutService = new PdfLayoutService(configuration);
 		
-		FactOrMythCardCreator cardCreator = new FactOrMythCardCreator(cardProvider, target);
+		FactOrMythCardCreator cardCreator = new FactOrMythCardCreator(cardProvider, layoutService);
 		
 		cardCreator.createCards();
 	}

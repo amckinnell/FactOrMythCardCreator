@@ -6,7 +6,7 @@ import com.valuablecode.tool.itext.PdfFactOrMythDocument;
 /**
  * Allows cards to be added to a PDF layout suitable for printing. 
  */
-public class PdfFactOrMythLayout implements FactOrMythLayout {
+public class PdfLayoutService implements FactOrMythLayoutService {
 	
 	private final PageLayout pageLayout;
 	private final FactOrMythDocument document;
@@ -15,11 +15,11 @@ public class PdfFactOrMythLayout implements FactOrMythLayout {
 	private int cardCount = 0;
 	
 
-	public PdfFactOrMythLayout(FactOrMythConfiguration configuration) {
+	public PdfLayoutService(FactOrMythConfiguration configuration) {
 		this(configuration.getPageLayout(), new PdfFactOrMythDocument(configuration));
 	}
 	
-	public PdfFactOrMythLayout(PageLayout pageLayout, FactOrMythDocument pdfDocument) {
+	public PdfLayoutService(PageLayout pageLayout, FactOrMythDocument pdfDocument) {
 		this.pageLayout = pageLayout;
 		this.document = pdfDocument;
 	}

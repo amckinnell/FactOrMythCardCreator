@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
 
-public class PdfFactOrMythLayoutTest {
+public class PdfLayoutServiceTest {
 	
 	final FactOrMythCard card_1 = new FactOrMythCard("card.1");
 	final FactOrMythCard card_2 = new FactOrMythCard("card.2");
@@ -17,7 +17,7 @@ public class PdfFactOrMythLayoutTest {
 
 	PageLayoutBuilder pageLayout;
 
-	FactOrMythLayout sut;
+	FactOrMythLayoutService sut;
 
 	@Test
 	public void adds_each_card_to_the_document() {
@@ -76,8 +76,8 @@ public class PdfFactOrMythLayoutTest {
 		verify(document, times(1)).emitPage();
 	}
 	
-	private PdfFactOrMythLayout createFactOrMythLayout(PageLayoutBuilder pageLayout) {
-		return new PdfFactOrMythLayout(pageLayout.build(), document);
+	private PdfLayoutService createFactOrMythLayout(PageLayoutBuilder pageLayout) {
+		return new PdfLayoutService(pageLayout.build(), document);
 	}
 	
 }
