@@ -7,23 +7,27 @@ package com.valuablecode.tool;
 public class PdfFactOrMythLayout implements FactOrMythLayout {
 	
 	private final PageLayout pageLayout;
-	private final FactOrMythDocument pdfDocument;
+	private final FactOrMythDocument document;
 
 	// The count of cards that we've added to the current page.
 	private int cardCount = 0;
 	
 
 	public PdfFactOrMythLayout(PageLayout pageLayout) {
-		this.pageLayout = pageLayout;
-		this.pdfDocument = new PdfFactOrMythDocument(pageLayout, new HardCodedCardFormat());
+		this(pageLayout, new PdfFactOrMythDocument(pageLayout, new HardCodedCardFormat()));
 	}
 	
+	public PdfFactOrMythLayout(PageLayout pageLayout, FactOrMythDocument pdfDocument) {
+		this.pageLayout = pageLayout;
+		this.document = pdfDocument;
+	}
+
 	public void addCard(FactOrMythCard card) {
-		pdfDocument.addCard(card);
+		document.addCard(card);
 		cardCount += 1;
 		
 		if (isCompletePage()) {
-			pdfDocument.emitPage();
+			document.emitPage();
 			cardCount = 0;
 		}
 	}
@@ -35,7 +39,7 @@ public class PdfFactOrMythLayout implements FactOrMythLayout {
 	public void complete() {
 		handleIncompletePage();
 		
-		pdfDocument.close();
+		document.close();
 	}
 
 	private void handleIncompletePage() {
@@ -43,7 +47,7 @@ public class PdfFactOrMythLayout implements FactOrMythLayout {
 		
 		handleIncompleteColumn();
 		
-		pdfDocument.emitPage();
+		document.emitPage();
 	}
 
 	private boolean isEmptyPage() {
@@ -53,7 +57,7 @@ public class PdfFactOrMythLayout implements FactOrMythLayout {
 	private void handleIncompleteColumn() {
 		if (isCompleteColumn()) return;
 		
-		pdfDocument.addCard(new FactOrMythCard(""));
+		document.addCard(new FactOrMythCard(""));
 	}
 
 	private boolean isCompleteColumn() {
