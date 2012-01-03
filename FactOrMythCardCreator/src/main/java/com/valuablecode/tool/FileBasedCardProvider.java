@@ -14,28 +14,26 @@ import java.util.List;
  */
 public class FileBasedCardProvider implements FactOrMythCardProvider {
 	
-	// Hard coded path to the source of the Fact or Myth phrases.
-	private static final String CARD_SOURCE = "/Users/alistair/Desktop/FactOrMyths.txt";
-	
 	private List<FactOrMythCard> cards = new ArrayList<FactOrMythCard>();
 	
-	public FileBasedCardProvider() {
-		this(initializeCardSource());
+
+	public FileBasedCardProvider(String cardSourceFileName) {
+		this(cardSourceFileName, initializeCardSource(cardSourceFileName));
 	}
 
-	private static BufferedReader initializeCardSource() {
+	private static BufferedReader initializeCardSource(String cardSourceFileName) {
 		try {
-			return new BufferedReader(new FileReader(new File(CARD_SOURCE)));
+			return new BufferedReader(new FileReader(new File(cardSourceFileName)));
 		} catch (FileNotFoundException e) {
-			throw new RuntimeException("Can't find Fact or Myth file: " + CARD_SOURCE, e);
+			throw new RuntimeException("Can't find Fact or Myth file: " + cardSourceFileName, e);
 		}
 	}
 
-	public FileBasedCardProvider(BufferedReader cardSource) {
+	public FileBasedCardProvider(String cardSourceFileName, BufferedReader cardSource) {
 		try {
 			initializeCards(cardSource);
 		} catch (IOException e) {
-			throw new RuntimeException("Can't read Fact or Myth phrases from: " + CARD_SOURCE, e);
+			throw new RuntimeException("Can't read Fact or Myth phrases from: " + cardSourceFileName, e);
 		}
 	}
 

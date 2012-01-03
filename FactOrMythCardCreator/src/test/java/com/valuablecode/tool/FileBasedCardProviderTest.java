@@ -43,6 +43,6 @@ public class FileBasedCardProviderTest {
 	private FileBasedCardProvider createFileBasedCardProvider(String cardSource) {
 		BufferedReader cardSourceReader = new BufferedReader(new StringReader(cardSource));	
 		
-		return new FileBasedCardProvider(cardSourceReader);
+		return new FileBasedCardProvider("Card Source File Name", cardSourceReader);
 	}
 }
