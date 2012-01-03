@@ -16,7 +16,7 @@ import org.junit.Test;
 public class FactOrMythCardCreatorTest {
 	
 	final FactOrMythCardProvider cardProvider = mock(FactOrMythCardProvider.class);
-	final FactOrMythLayout layout = mock(FactOrMythLayout.class); 
+	final FactOrMythLayout layout = mock(FactOrMythLayout.class);
 	
 	final FactOrMythCardCreator sut = new FactOrMythCardCreator(cardProvider, layout);
 	
