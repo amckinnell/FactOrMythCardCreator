@@ -9,7 +9,7 @@ import com.valuablecode.tool.CardFormat;
  */
 public class HardCodedCardFormat implements CardFormat {
 	
-	// The safest choice is to embed the font in the layout.
+	// The safest choice is to embed the font in the PDF document.
 	private static final boolean EMBED_FONT_IN_DOCUMENT = true;
 
 	// Hard coded fully qualified path to the card font.
