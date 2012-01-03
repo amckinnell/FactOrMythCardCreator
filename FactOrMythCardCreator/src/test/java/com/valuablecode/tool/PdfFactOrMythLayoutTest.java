@@ -1,6 +1,7 @@
 package com.valuablecode.tool;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -8,6 +9,9 @@ import org.junit.Test;
 
 public class PdfFactOrMythLayoutTest {
 	
+	final FactOrMythCard card_1 = new FactOrMythCard("card.1");
+	final FactOrMythCard card_2 = new FactOrMythCard("card.2");
+
 	final PageLayout pageLayout = mock(PageLayout.class);
 	final FactOrMythDocument document = mock(FactOrMythDocument.class);
 	
@@ -15,37 +19,52 @@ public class PdfFactOrMythLayoutTest {
 
 	@Test
 	public void adds_each_card_to_the_document() {
-		FactOrMythCard card = new FactOrMythCard("dont_care");
+		sut.addCard(card_1);
 
-		sut.addCard(card);
-
-		verify(document).addCard(card);
+		verify(document).addCard(card_1);
 	}
 	
 	@Test
 	public void emits_page_when_page_is_complete() {
-		FactOrMythCard card = new FactOrMythCard("dont_care");
-		
 		when(pageLayout.getCardsPerPage()).thenReturn(1);
 
-		sut.addCard(card);
+		sut.addCard(card_1);
 
-		verify(document).addCard(card);
 		verify(document).emitPage();
 	}
 	
 	@Test
-	public void adds_empty_card_when_page_is_incomplete() {
-		FactOrMythCard card = new FactOrMythCard("dont_care");
-		
+	public void adds_a_blank_card_when_column_is_incomplete() {
+		when(pageLayout.getCardsPerPage()).thenReturn(2);
+		when(pageLayout.getColumnsPerPage()).thenReturn(3);
+
+		sut.addCard(card_1);
+		sut.complete();
+
+		verify(document).addCard(FactOrMythCard.aBlankCard);
+		verify(document).emitPage();
+	}
+	
+	@Test
+	public void does_not_add_empty_card_when_colum_is_complete() {
+		when(pageLayout.getCardsPerPage()).thenReturn(6);
+		when(pageLayout.getColumnsPerPage()).thenReturn(2);
+
+		sut.addCard(card_1);
+		sut.addCard(card_2);
+		sut.complete();
+
+		verify(document, never()).addCard(FactOrMythCard.aBlankCard);
+	}
+	
+	@Test
+	public void does_nothing_when_page_is_complete() {
 		when(pageLayout.getCardsPerPage()).thenReturn(2);
 		when(pageLayout.getColumnsPerPage()).thenReturn(2);
 
-		sut.addCard(card);
+		sut.addCard(card_1);
+		sut.addCard(card_2);
 		sut.complete();
-
-		verify(document).addCard(card);
-		verify(document).emitPage();
 	}
 	
 }
