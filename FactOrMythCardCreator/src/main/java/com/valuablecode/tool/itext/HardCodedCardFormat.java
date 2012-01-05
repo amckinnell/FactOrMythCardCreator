@@ -17,8 +17,9 @@ public class HardCodedCardFormat implements CardFormat {
 	
 	private final Font cardFont;
 	
+	
 	public HardCodedCardFormat() {
-		cardFont = initializeCardFont();
+		this.cardFont = initializeCardFont();
 	}
 
 	public Font getFont() {
