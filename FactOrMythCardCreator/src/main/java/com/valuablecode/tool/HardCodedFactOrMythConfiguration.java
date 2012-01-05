@@ -3,7 +3,7 @@ package com.valuablecode.tool;
 import com.valuablecode.tool.itext.HardCodedCardFormat;
 
 /**
- * Knows all the configuration related to creating Fact Or Myth cards.
+ * Hard-coded configuration related to creating Fact Or Myth cards.
  */
 public class HardCodedFactOrMythConfiguration implements FactOrMythConfiguration {
 
