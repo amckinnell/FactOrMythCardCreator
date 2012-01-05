@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Test;
 
-import com.valuablecode.tool.itext.HardCodedCardFormat;
+import com.valuablecode.tool.itext.ConfigurableCardFormat;
 
 public class PropertyFileFactOrMythConfigurationTest {
 
@@ -58,7 +58,7 @@ public class PropertyFileFactOrMythConfigurationTest {
 	configures_the_card_format() {
 		when(configuration.getString("pageLayout")).thenReturn("Letter");
 		
-		assertThat(sut.getCardFormat(), instanceOf(HardCodedCardFormat.class));
+		assertThat(sut.getCardFormat(), instanceOf(ConfigurableCardFormat.class));
 	}
 	
 	@Test public void

@@ -4,7 +4,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-import com.valuablecode.tool.itext.HardCodedCardFormat;
+import com.valuablecode.tool.itext.ConfigurableCardFormat;
 
 /**
  * Property file based configuration related to creating Fact Or Myth cards.
@@ -76,8 +76,7 @@ public class PropertyFileFactOrMythConfiguration implements FactOrMythConfigurat
 	}
 
 	public CardFormat getCardFormat() {
-		// TODO [FactOrMythCards] AM Jan 5, 2012: This one is still hard coded.
-		return new HardCodedCardFormat();
+		return new ConfigurableCardFormat(new HardCodedCardFontConfiguration());
 	}
 
 }
