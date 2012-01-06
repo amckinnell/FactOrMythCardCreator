@@ -9,7 +9,7 @@ import com.valuablecode.tool.itext.ConfigurableCardFormat;
 /**
  * Property file based configuration related to creating Fact Or Myth cards.
  */
-public class PropertyFileFactOrMythConfiguration implements FactOrMythConfiguration {
+public class PropertyFileConfiguration implements FactOrMythConfiguration {
 	
 	// Key definitions for the configuration property file.
 	private static final String CARD_SOURCE_FILE_NAME_PROPERTY_KEY = "cardSourceFileName";
@@ -22,7 +22,7 @@ public class PropertyFileFactOrMythConfiguration implements FactOrMythConfigurat
 	
 	private Configuration configuration;
 
-	public PropertyFileFactOrMythConfiguration(String propertyFileName) {
+	public PropertyFileConfiguration(String propertyFileName) {
 		this(initializeConfiguration(propertyFileName));
 	}
 
@@ -34,7 +34,7 @@ public class PropertyFileFactOrMythConfiguration implements FactOrMythConfigurat
 		}
 	}
 
-	public PropertyFileFactOrMythConfiguration(Configuration configuration) {
+	public PropertyFileConfiguration(Configuration configuration) {
 		this.configuration = configuration;
 	}
 

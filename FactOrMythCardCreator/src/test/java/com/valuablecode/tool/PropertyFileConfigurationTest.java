@@ -13,11 +13,11 @@ import org.junit.Test;
 
 import com.valuablecode.tool.itext.ConfigurableCardFormat;
 
-public class PropertyFileFactOrMythConfigurationTest {
+public class PropertyFileConfigurationTest {
 
 	Configuration configuration = mock(Configuration.class);
 	
-	final PropertyFileFactOrMythConfiguration sut = new PropertyFileFactOrMythConfiguration(configuration);
+	final PropertyFileConfiguration sut = new PropertyFileConfiguration(configuration);
 
 	@Test public void
 	configures_the_card_source_file_name() {
@@ -75,7 +75,7 @@ public class PropertyFileFactOrMythConfigurationTest {
 	@Test public void
 	fails_for_an_invalid_file_name() {
 		 try {
-			new PropertyFileFactOrMythConfiguration("_INVALID_FILE_NAME_"); 
+			new PropertyFileConfiguration("_INVALID_FILE_NAME_"); 
 			fail();
 		} catch (RuntimeException expected) {
 			assertThat(expected.getMessage(), containsString("_INVALID_FILE_NAME_"));
