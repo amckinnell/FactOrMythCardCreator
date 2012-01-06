@@ -15,16 +15,20 @@ public class ConfigurableCardFormat implements CardFormat {
 	// The safest choice is to embed the font in the PDF document.
 	private static final boolean EMBED_FONT_IN_DOCUMENT = true;
 
-	private final Font cardFont;
 	private final CardFontConfiguration configuration;
+
+	private Font cardFont;
 	
 	
 	public ConfigurableCardFormat(CardFontConfiguration configuration) {
 		this.configuration = configuration;
-		this.cardFont = initializeCardFont();
 	}
 
 	public Font getFont() {
+		if (null == cardFont) {
+			cardFont = initializeCardFont();
+		}
+		
 		return cardFont;
 	}
 
