@@ -11,8 +11,6 @@ import static org.mockito.Mockito.when;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Test;
 
-import com.valuablecode.tool.itext.ConfigurableCardFormat;
-
 public class PropertyFileConfigurationTest {
 
 	Configuration configuration = mock(Configuration.class);
@@ -52,13 +50,6 @@ public class PropertyFileConfigurationTest {
 		when(configuration.getString("pageLayout")).thenReturn(" IndexCard  ");
 		
 		assertThat(sut.getPageLayout(), instanceOf(IndexCardPageLayout.class));
-	}
-	
-	@Test public void
-	configures_the_card_format() {
-		when(configuration.getString("pageLayout")).thenReturn("Letter");
-		
-		assertThat(sut.getCardFormat(), instanceOf(ConfigurableCardFormat.class));
 	}
 	
 	@Test public void

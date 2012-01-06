@@ -9,12 +9,16 @@ import com.valuablecode.tool.itext.ConfigurableCardFormat;
 /**
  * Property file based configuration related to creating Fact Or Myth cards.
  */
-public class PropertyFileConfiguration implements FactOrMythConfiguration {
+public class PropertyFileConfiguration implements FactOrMythConfiguration, CardFontConfiguration {
 	
 	// Key definitions for the configuration property file.
 	private static final String CARD_SOURCE_FILE_NAME_PROPERTY_KEY = "cardSourceFileName";
 	private static final String OUTPUT_FILE_NAME_PROPERTY_KEY = "outputFileName";
 	private static final String PAGE_LAYOUT_PROPERTY_KEY = "pageLayout";
+	
+	private static final String FONT_PATH_PROPERTY_KEY = "font.fileName";
+	private static final String FONT_NAME_PROPERTY_KEY = "font.name";
+	private static final String FONT_SIZE_PROPERTY_KEY = "font.size";
 
 	// Normalised values for the page layout property. Values read from the property file are normalised by 
 	// trimming whitespace and converting the value to all upper case.
@@ -76,7 +80,19 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration {
 	}
 
 	public CardFormat getCardFormat() {
-		return new ConfigurableCardFormat(new HardCodedCardFontConfiguration());
+		return new ConfigurableCardFormat(this);
+	}
+
+	public String getCardFontPath() {
+		return configuration.getString(FONT_PATH_PROPERTY_KEY);
+	}
+
+	public String getCardFontName() {
+		return configuration.getString(FONT_NAME_PROPERTY_KEY);
+	}
+
+	public float getFontSize() {
+		return configuration.getFloat(FONT_SIZE_PROPERTY_KEY);
 	}
 
 }
