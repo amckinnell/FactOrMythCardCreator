@@ -31,7 +31,7 @@ public class ConfigurableCardFormat implements CardFormat {
 	private Font initializeCardFont() {
         Font result = createFont();
         
-        result.setSize(configuration.getFontSize());
+        result.setSize(configuration.getCardFontSize());
         result.setStyle(Font.NORMAL);
         
 		return result;

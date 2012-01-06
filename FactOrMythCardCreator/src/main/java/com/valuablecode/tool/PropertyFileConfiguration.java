@@ -91,7 +91,7 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
 		return configuration.getString(FONT_NAME_PROPERTY_KEY);
 	}
 
-	public float getFontSize() {
+	public float getCardFontSize() {
 		return configuration.getFloat(FONT_SIZE_PROPERTY_KEY);
 	}
 

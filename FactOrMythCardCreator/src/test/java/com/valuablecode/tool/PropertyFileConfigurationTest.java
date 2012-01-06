@@ -53,6 +53,27 @@ public class PropertyFileConfigurationTest {
 	}
 	
 	@Test public void
+	configures_the_card_font_path() {
+		when(configuration.getString("font.fileName")).thenReturn("CARD FONT PATH VALUE");
+		
+		assertThat(sut.getCardFontPath(), equalTo("CARD FONT PATH VALUE"));
+	}
+	
+	@Test public void
+	configures_the_card_font_name() {
+		when(configuration.getString("font.name")).thenReturn("CARD FONT NAME VALUE");
+		
+		assertThat(sut.getCardFontName(), equalTo("CARD FONT NAME VALUE"));
+	}
+	
+	@Test public void
+	configures_the_font_size() {
+		when(configuration.getFloat("font.size")).thenReturn(14f);
+		
+		assertThat(sut.getCardFontSize(), equalTo(14f));
+	}
+	
+	@Test public void
 	fails_for_an_invalid_page_layout_specification() {
 		 try {
 			when(configuration.getString("pageLayout")).thenReturn("_INVALID_PAGE_LAYOUT_SPECIFICATION_");

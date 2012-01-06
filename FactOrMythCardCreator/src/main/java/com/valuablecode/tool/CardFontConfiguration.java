@@ -7,6 +7,6 @@ public interface CardFontConfiguration {
 
 	String getCardFontPath();
 	String getCardFontName();
-	float getFontSize();
+	float getCardFontSize();
 
 }
