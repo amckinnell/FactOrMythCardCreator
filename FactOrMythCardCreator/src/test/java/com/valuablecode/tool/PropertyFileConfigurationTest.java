@@ -51,7 +51,7 @@ public class PropertyFileConfigurationTest {
 	
 	@Test public void
 	configures_the_page_layout_for_letter_border_specification() {
-		when(configuration.getString("pageLayout")).thenReturn("LetterBorder");
+		when(configuration.getString("pageLayout")).thenReturn("Letter With Borders");
 		
 		assertThat(sut.getPageLayout(), instanceOf(LetterPageLayout.class));
 		assertThat(sut.getPageLayout().getBorder(), equalTo(Rectangle.BOX));
@@ -59,14 +59,14 @@ public class PropertyFileConfigurationTest {
 	
 	@Test public void
 	configures_the_page_layout_for_index_card_specification() {
-		when(configuration.getString("pageLayout")).thenReturn("IndexCard");
+		when(configuration.getString("pageLayout")).thenReturn("Index Card");
 		
 		assertThat(sut.getPageLayout(), instanceOf(IndexCardPageLayout.class));
 	}
 	
 	@Test public void
 	configures_the_page_layout_for_index_card_specification_with_spaces() {
-		when(configuration.getString("pageLayout")).thenReturn(" IndexCard  ");
+		when(configuration.getString("pageLayout")).thenReturn(" Index  Card  ");
 		
 		assertThat(sut.getPageLayout(), instanceOf(IndexCardPageLayout.class));
 	}

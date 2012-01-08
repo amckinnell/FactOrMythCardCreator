@@ -24,8 +24,8 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
 	private static final String FONT_SIZE_PROPERTY_KEY = "font.size";
 
 	// Normalised values for the page layout property. Values read from the property file are normalised by 
-	// trimming whitespace and converting the value to all upper case.
-	private enum SupportedPageLayouts { BINGO, INDEXCARD, LETTER, LETTERBORDER }
+	// trimming whitespace, replacing whitespace with an underscore, and converting the value to all upper case.
+	private enum SupportedPageLayouts { BINGO, INDEX_CARD, LETTER, LETTER_WITH_BORDERS }
 	
 	private Configuration configuration;
 
@@ -58,13 +58,13 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
 			case BINGO:
 				return new BingoPageLayout();
 
-			case INDEXCARD:
+			case INDEX_CARD:
 				return new IndexCardPageLayout();
 
 			case LETTER:
 				return aLetterPageLayout();
 
-			case LETTERBORDER:
+			case LETTER_WITH_BORDERS:
 				return aLetterPageLayoutWithBorders();
 
 			default:
@@ -85,7 +85,7 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
 	}
 
 	private String normalizeRawValue(String rawPageLayoutSpecification) {
-		return rawPageLayoutSpecification.trim().toUpperCase();
+		return rawPageLayoutSpecification.trim().replaceAll(" +", "_").toUpperCase();
 	}
 
 	public CardFormat getCardFormat() {
