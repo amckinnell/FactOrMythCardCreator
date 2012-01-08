@@ -2,10 +2,8 @@ package com.valuablecode.tool.itext;
 
 import static com.itextpdf.text.FontFactory.defaultEncoding;
 
-import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Rectangle;
 import com.valuablecode.tool.CardFontConfiguration;
 import com.valuablecode.tool.CardFormat;
 
@@ -49,12 +47,4 @@ public class ConfigurableCardFormat implements CardFormat {
 		return FontFactory.getFont(configuration.getCardFontName(), defaultEncoding, EMBED_FONT_IN_DOCUMENT);
 	}
 
-	public int getBorder() {
-		return Rectangle.NO_BORDER;
-	}
-
-	public BaseColor getBorderColor() {
-		return new BaseColor(190, 190, 190);	// Gray
-	}
-	
 }

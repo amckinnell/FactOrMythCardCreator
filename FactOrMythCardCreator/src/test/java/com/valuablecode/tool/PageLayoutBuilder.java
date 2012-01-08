@@ -1,5 +1,6 @@
 package com.valuablecode.tool;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Rectangle;
 
 public class PageLayoutBuilder implements TestDataBuilder<PageLayout> {
@@ -30,6 +31,14 @@ public class PageLayoutBuilder implements TestDataBuilder<PageLayout> {
 			
 			public int getCardsPerPage() {
 				return cardsPerPage;
+			}
+
+			public int getBorder() {
+				return Rectangle.NO_BORDER;
+			}
+
+			public BaseColor getBorderColor() {
+				return BaseColor.GRAY;
 			}
 		};
 	}

@@ -1,5 +1,6 @@
 package com.valuablecode.tool;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Rectangle;
 
 public interface PageLayout {
@@ -15,5 +16,9 @@ public interface PageLayout {
 
 	// Each card has this height.
 	float getCardHeight();
+
+	int getBorder();
+
+	BaseColor getBorderColor();
 
 }
