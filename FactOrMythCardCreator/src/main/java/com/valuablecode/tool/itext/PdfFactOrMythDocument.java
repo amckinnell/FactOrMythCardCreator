@@ -6,7 +6,6 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -87,9 +86,12 @@ public class PdfFactOrMythDocument implements FactOrMythDocument {
 	private PdfPCell createCardLayoutFor(FactOrMythCard card) {
 		PdfPCell result = new PdfPCell(new Phrase(card.getCardText(), cardFormat.getFont()));
 		
-		result.setBorder(Rectangle.NO_BORDER);
+		result.setBorder(cardFormat.getBorder());
+		result.setBorderColor(cardFormat.getBorderColor());
+		
 		result.setHorizontalAlignment(Element.ALIGN_CENTER);
 		result.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
 		result.setFixedHeight(pageLayout.getCardHeight());
 
 		return result;
