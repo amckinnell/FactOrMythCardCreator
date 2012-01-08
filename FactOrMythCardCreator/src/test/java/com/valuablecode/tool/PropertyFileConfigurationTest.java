@@ -34,6 +34,13 @@ public class PropertyFileConfigurationTest {
 	}
 	
 	@Test public void
+	configures_the_page_layout_for_bingo_specification() {
+		when(configuration.getString("pageLayout")).thenReturn("Bingo");
+		
+		assertThat(sut.getPageLayout(), instanceOf(BingoPageLayout.class));
+	}
+	
+	@Test public void
 	configures_the_page_layout_for_letter_specification() {
 		when(configuration.getString("pageLayout")).thenReturn("Letter");
 		
