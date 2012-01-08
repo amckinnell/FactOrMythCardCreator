@@ -14,7 +14,21 @@ public class LetterPageLayout extends BasePageLayout {
 	private final static Rectangle pageSize = new Rectangle(inchesToPoints(11.5f), inchesToPoints(8f));
 
 	private static final BaseColor LIGHT_GRAY = new BaseColor(211, 211, 211);
+	
+	private final int border;
 
+	
+	public static LetterPageLayout aLetterPageLayout() {
+		return new LetterPageLayout(Rectangle.NO_BORDER);
+	}
+
+	public static LetterPageLayout aLetterPageLayoutWithBorders() {
+		return new LetterPageLayout(Rectangle.BOX);
+	}
+
+	private LetterPageLayout(int border) {
+		this.border = border;
+	}
 	
 	public int getCardsPerPage() {
 		return 6;
@@ -29,7 +43,7 @@ public class LetterPageLayout extends BasePageLayout {
 	}
 
 	public int getBorder() {
-		return Rectangle.NO_BORDER;
+		return border;
 	}
 
 	public BaseColor getBorderColor() {

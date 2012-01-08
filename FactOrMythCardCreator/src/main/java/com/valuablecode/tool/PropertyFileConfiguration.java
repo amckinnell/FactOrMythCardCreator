@@ -1,5 +1,8 @@
 package com.valuablecode.tool;
 
+import static com.valuablecode.tool.LetterPageLayout.aLetterPageLayout;
+import static com.valuablecode.tool.LetterPageLayout.aLetterPageLayoutWithBorders;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -22,7 +25,7 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
 
 	// Normalised values for the page layout property. Values read from the property file are normalised by 
 	// trimming whitespace and converting the value to all upper case.
-	private enum SupportedPageLayouts { BINGO, INDEXCARD, LETTER }
+	private enum SupportedPageLayouts { BINGO, INDEXCARD, LETTER, LETTERBORDER }
 	
 	private Configuration configuration;
 
@@ -59,7 +62,10 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
 				return new IndexCardPageLayout();
 
 			case LETTER:
-				return new LetterPageLayout();
+				return aLetterPageLayout();
+
+			case LETTERBORDER:
+				return aLetterPageLayoutWithBorders();
 
 			default:
 				throw new RuntimeException("Unknown page layout: " + getSupportedPageLayout());

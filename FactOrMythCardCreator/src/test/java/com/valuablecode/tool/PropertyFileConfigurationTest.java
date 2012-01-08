@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Test;
 
+import com.itextpdf.text.Rectangle;
 import com.valuablecode.tool.itext.ConfigurableCardFormat;
 
 public class PropertyFileConfigurationTest {
@@ -45,6 +46,15 @@ public class PropertyFileConfigurationTest {
 		when(configuration.getString("pageLayout")).thenReturn("Letter");
 		
 		assertThat(sut.getPageLayout(), instanceOf(LetterPageLayout.class));
+		assertThat(sut.getPageLayout().getBorder(), equalTo(Rectangle.NO_BORDER));
+	}
+	
+	@Test public void
+	configures_the_page_layout_for_letter_border_specification() {
+		when(configuration.getString("pageLayout")).thenReturn("LetterBorder");
+		
+		assertThat(sut.getPageLayout(), instanceOf(LetterPageLayout.class));
+		assertThat(sut.getPageLayout().getBorder(), equalTo(Rectangle.BOX));
 	}
 	
 	@Test public void
