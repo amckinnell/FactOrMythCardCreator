@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class FileBasedCardProvider implements FactOrMythCardProvider {
 	
+	private static final String FACT_OR_MYTH_TITLE = "Fact or Myth?";
+	
 	private List<FactOrMythCard> cards = new ArrayList<FactOrMythCard>();
 	
 
@@ -49,6 +51,16 @@ public class FileBasedCardProvider implements FactOrMythCardProvider {
 			
 			factOrMythPhrase = cardSource.readLine();
 		}
+		
+		initializeTitleCard();
+	}
+
+	private void initializeTitleCard() {
+		if (cards.isEmpty()) return;
+		
+		FactOrMythCard titleCard = cards.remove(0);
+		
+		cards.add(0, createFactOrMythCard(titleCard.getCardText() + "\n\n" + FACT_OR_MYTH_TITLE));
 	}
 
 	private FactOrMythCard createFactOrMythCard(String factOrMythPhrase) {

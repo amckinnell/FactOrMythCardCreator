@@ -19,31 +19,32 @@ public class FileBasedCardProviderTest {
 
 	@Test public void
 	creates_single_card() {
-		FileBasedCardProvider sut = createFileBasedCardProvider("First Card");
+		FileBasedCardProvider sut = createFileBasedCardProvider("Title Card");
 		List<FactOrMythCard> cards = sut.getCards();
 		
 		assertThat(cards.size(), equalTo(1));
-		assertThat(cards.get(0).getCardText(), equalTo("First Card"));
+		assertThat(cards.get(0).getCardText(), equalTo("Title Card\n\nFact or Myth?"));
 	}
 
 	@Test public void
 	creates_multiple_cards() {
-		FileBasedCardProvider sut = createFileBasedCardProvider("First Card\nSecond Card");
+		FileBasedCardProvider sut = createFileBasedCardProvider("Title Card\nFirst Card");
 		List<FactOrMythCard> cards = sut.getCards();
 		
 		assertThat(cards.size(), equalTo(2));
-		assertThat(cards.get(0).getCardText(), equalTo("First Card"));
-		assertThat(cards.get(1).getCardText(), equalTo("Second Card"));
+		assertThat(cards.get(0).getCardText(), equalTo("Title Card\n\nFact or Myth?"));
+		assertThat(cards.get(1).getCardText(), equalTo("First Card"));
 	}
 
 	@Test public void
 	creates_multiline_cards() {
-		FileBasedCardProvider sut = createFileBasedCardProvider("First Card|Extra Line|Extra Extra Line\nSecond Card");
+		FileBasedCardProvider sut = createFileBasedCardProvider("Title Card\nFirst Card|Extra Line|Extra Extra Line\nSecond Card");
 		List<FactOrMythCard> cards = sut.getCards();
 		
-		assertThat(cards.size(), equalTo(2));
-		assertThat(cards.get(0).getCardText(), equalTo("First Card\nExtra Line\nExtra Extra Line"));
-		assertThat(cards.get(1).getCardText(), equalTo("Second Card"));
+		assertThat(cards.size(), equalTo(3));
+		assertThat(cards.get(0).getCardText(), equalTo("Title Card\n\nFact or Myth?"));
+		assertThat(cards.get(1).getCardText(), equalTo("First Card\nExtra Line\nExtra Extra Line"));
+		assertThat(cards.get(2).getCardText(), equalTo("Second Card"));
 	}
 	
 	@Test public void
