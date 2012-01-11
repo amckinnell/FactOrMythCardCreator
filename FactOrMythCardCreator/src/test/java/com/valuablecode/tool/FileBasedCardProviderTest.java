@@ -23,7 +23,7 @@ public class FileBasedCardProviderTest {
 		List<FactOrMythCard> cards = sut.getCards();
 		
 		assertThat(cards.size(), equalTo(1));
-		assertThat(cards.get(0).getCardText(), equalTo("Title Card\n\nFact or Myth?"));
+		assertThat(cards.get(0).getCardText(), equalTo("Title Card"));
 	}
 
 	@Test public void
@@ -32,7 +32,7 @@ public class FileBasedCardProviderTest {
 		List<FactOrMythCard> cards = sut.getCards();
 		
 		assertThat(cards.size(), equalTo(2));
-		assertThat(cards.get(0).getCardText(), equalTo("Title Card\n\nFact or Myth?"));
+		assertThat(cards.get(0).getCardText(), equalTo("Title Card"));
 		assertThat(cards.get(1).getCardText(), equalTo("First Card"));
 	}
 
@@ -42,7 +42,7 @@ public class FileBasedCardProviderTest {
 		List<FactOrMythCard> cards = sut.getCards();
 		
 		assertThat(cards.size(), equalTo(3));
-		assertThat(cards.get(0).getCardText(), equalTo("Title Card\n\nFact or Myth?"));
+		assertThat(cards.get(0).getCardText(), equalTo("Title Card"));
 		assertThat(cards.get(1).getCardText(), equalTo("First Card\nExtra Line\nExtra Extra Line"));
 		assertThat(cards.get(2).getCardText(), equalTo("Second Card"));
 	}
