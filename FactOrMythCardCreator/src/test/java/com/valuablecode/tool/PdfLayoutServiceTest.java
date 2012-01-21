@@ -40,14 +40,14 @@ public class PdfLayoutServiceTest {
 	}
 	
 	@Test
-	public void adds_a_blank_card_when_column_is_incomplete() {
+	public void adds__blank_cards_when_column_is_incomplete() {
 		pageLayout = aPageLayout().withCardsPerPage(6).withColumnsPerPage(3);
 		sut = createFactOrMythLayout(pageLayout);
 
 		sut.addCard(card_1);
 		sut.complete();
 
-		verify(document).addCard(FactOrMythCard.aBlankCard);
+		verify(document, times(2)).addCard(FactOrMythCard.aBlankCard);
 		verify(document).emitPage();
 	}
 	

@@ -48,7 +48,7 @@ public class PdfLayoutService implements FactOrMythLayoutService {
 		if (isEmptyPage()) return;
 		
 		handleIncompleteColumn();
-		
+
 		document.emitPage();
 	}
 
@@ -58,8 +58,14 @@ public class PdfLayoutService implements FactOrMythLayoutService {
 
 	private void handleIncompleteColumn() {
 		if (isCompleteColumn()) return;
-		
-		document.addCard(FactOrMythCard.aBlankCard);
+
+		for (int i = 0; i < getMissingCoumnCount(); i++) {
+			document.addCard(FactOrMythCard.aBlankCard);
+		}
+	}
+
+	private int getMissingCoumnCount() {
+		return pageLayout.getColumnsPerPage() - (cardCount % pageLayout.getColumnsPerPage());
 	}
 
 	private boolean isCompleteColumn() {
