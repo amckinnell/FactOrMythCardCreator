@@ -16,7 +16,7 @@ import com.valuablecode.tool.FactOrMythDocument;
 import com.valuablecode.tool.PageLayout;
 
 public class PdfFactOrMythDocument implements FactOrMythDocument {
-	
+
 	// Values taken from the Fact or Myth configuration.
 	private final CardFormat cardFormat;
 	private final String outputFileName;
@@ -33,10 +33,10 @@ public class PdfFactOrMythDocument implements FactOrMythDocument {
 		this.outputFileName = configuration.getOutputFileName();
 		this.pageLayout = configuration.getPageLayout();
 		this.cardFormat = configuration.getCardFormat();
-		
+
 		initializePage();
 	}
-	
+
 	public void close() {
 		document.close();
 	}
@@ -48,7 +48,7 @@ public class PdfFactOrMythDocument implements FactOrMythDocument {
 		} catch (DocumentException e) {
 			throw new RuntimeException("Can't layout page", e);
 		}
-		
+
 		initializePage();
 	}
 
@@ -66,7 +66,7 @@ public class PdfFactOrMythDocument implements FactOrMythDocument {
 	private void guaranteeDocumentIsInitialized() {
 		if (null == document) {
 			document = initializeDocument();
-			
+
 			document.open();
 		}
 	}
@@ -79,22 +79,24 @@ public class PdfFactOrMythDocument implements FactOrMythDocument {
 		} catch (Exception e) {
 			throw new RuntimeException("Unable to initialize layout", e);
 		}
-		
+
 		return document;
 	}
 
 	private PdfPCell createCardLayoutFor(FactOrMythCard card) {
 		PdfPCell result = new PdfPCell(new Phrase(card.getCardText(), cardFormat.getFont()));
-		
+
 		result.setBorder(pageLayout.getBorder());
 		result.setBorderColor(pageLayout.getBorderColor());
-		
+
 		result.setHorizontalAlignment(Element.ALIGN_CENTER);
 		result.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		result.setFixedHeight(pageLayout.getCardHeight());
 
+		result.setLeading(0.0F, 1.25F);
+
 		return result;
 	}
-	
+
 }
