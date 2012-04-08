@@ -13,24 +13,25 @@ import com.valuablecode.tool.itext.ConfigurableCardFormat;
  * Property file based configuration related to creating Fact Or Myth cards.
  */
 public class PropertyFileConfiguration implements FactOrMythConfiguration, CardFontConfiguration {
-	
+
 	// Key definitions for the configuration property file.
 	private static final String CARD_SOURCE_FILE_NAME_PROPERTY_KEY = "cardSourceFileName";
 	private static final String OUTPUT_FILE_NAME_PROPERTY_KEY = "outputFileName";
 	private static final String PAGE_LAYOUT_PROPERTY_KEY = "pageLayout";
-	
+
 	private static final String FONT_PATH_PROPERTY_KEY = "font.fileName";
 	private static final String FONT_NAME_PROPERTY_KEY = "font.name";
 	private static final String FONT_SIZE_PROPERTY_KEY = "font.size";
 
-	// Normalised values for the page layout property. Values read from the property file are normalised by 
+	// Normalised values for the page layout property. Values read from the property file are normalised by
 	// trimming whitespace, replacing whitespace with an underscore, and converting the value to all upper case.
 	private enum SupportedPageLayouts { BINGO, INDEX_CARD, LETTER, LETTER_WITH_BORDERS }
-	
-	private Configuration configuration;
+
+	private final Configuration configuration;
+    private final String propertyFileName;
 
 	public PropertyFileConfiguration(String propertyFileName) {
-		this(initializeConfiguration(propertyFileName));
+		this(propertyFileName, initializeConfiguration(propertyFileName));
 	}
 
 	private static Configuration initializeConfiguration(String propertyFileName) {
@@ -41,7 +42,8 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
 		}
 	}
 
-	public PropertyFileConfiguration(Configuration configuration) {
+	public PropertyFileConfiguration(String propertyFileName, Configuration configuration) {
+	    this.propertyFileName = propertyFileName;
 		this.configuration = configuration;
 	}
 
