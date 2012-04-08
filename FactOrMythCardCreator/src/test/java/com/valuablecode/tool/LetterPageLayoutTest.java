@@ -8,11 +8,11 @@ import org.junit.Test;
 
 public class LetterPageLayoutTest {
 
-	@Test public void
-	card_height_same_as_page_height_divided_by_cards_in_column() {
-		LetterPageLayout sut = aLetterPageLayout();
-		
-		assertThat(sut.getCardHeight(), equalTo(sut.getPageSize().getHeight() / 3));
-	}
-	
+    @Test public void
+    card_height_same_as_page_height_divided_by_cards_in_column() {
+        LetterPageLayout sut = aLetterPageLayout();
+
+        assertThat(sut.getCardHeight(), equalTo(sut.getPageSize().getHeight() / 3));
+    }
+
 }

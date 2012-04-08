@@ -7,6 +7,6 @@ import java.util.List;
  */
 public interface FactOrMythCardProvider {
 
-	List<FactOrMythCard> getCards();
+    List<FactOrMythCard> getCards();
 
 }

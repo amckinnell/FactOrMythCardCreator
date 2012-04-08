@@ -13,50 +13,50 @@ import java.util.List;
  * Knows how to provide a list of Fact or Myth cards by reading from a file.
  */
 public class FileBasedCardProvider implements FactOrMythCardProvider {
-	
-	private List<FactOrMythCard> cards = new ArrayList<FactOrMythCard>();
-	
 
-	public FileBasedCardProvider(FactOrMythConfiguration configuration) {
-		this(configuration.getCardSourceFileName());
-	}
+    private final List<FactOrMythCard> cards = new ArrayList<FactOrMythCard>();
 
-	public FileBasedCardProvider(String cardSourceFileName) {
-		this(cardSourceFileName, initializeCardSource(cardSourceFileName));
-	}
 
-	private static BufferedReader initializeCardSource(String cardSourceFileName) {
-		try {
-			return new BufferedReader(new FileReader(new File(cardSourceFileName)));
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("Can't find Fact or Myth file: " + cardSourceFileName, e);
-		}
-	}
+    public FileBasedCardProvider(FactOrMythConfiguration configuration) {
+        this(configuration.getCardSourceFileName());
+    }
 
-	public FileBasedCardProvider(String cardSourceFileName, BufferedReader cardSource) {
-		try {
-			initializeCards(cardSource);
-		} catch (IOException e) {
-			throw new RuntimeException("Can't read Fact or Myth phrases from: " + cardSourceFileName, e);
-		}
-	}
+    public FileBasedCardProvider(String cardSourceFileName) {
+        this(cardSourceFileName, initializeCardSource(cardSourceFileName));
+    }
 
-	private void initializeCards(BufferedReader cardSource) throws IOException {
-		String factOrMythPhrase = cardSource.readLine();
-		
-		while (null != factOrMythPhrase) {
-			cards.add(createFactOrMythCard(factOrMythPhrase));
-			
-			factOrMythPhrase = cardSource.readLine();
-		}
-	}
+    private static BufferedReader initializeCardSource(String cardSourceFileName) {
+        try {
+            return new BufferedReader(new FileReader(new File(cardSourceFileName)));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Can't find Fact or Myth file: " + cardSourceFileName, e);
+        }
+    }
 
-	private FactOrMythCard createFactOrMythCard(String factOrMythPhrase) {
-		return new FactOrMythCard(factOrMythPhrase.replaceAll("\\|", "\n"));
-	}
+    public FileBasedCardProvider(String cardSourceFileName, BufferedReader cardSource) {
+        try {
+            initializeCards(cardSource);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read Fact or Myth phrases from: " + cardSourceFileName, e);
+        }
+    }
 
-	public List<FactOrMythCard> getCards() {
-		return Collections.unmodifiableList(cards);
-	}
-	
+    private void initializeCards(BufferedReader cardSource) throws IOException {
+        String factOrMythPhrase = cardSource.readLine();
+
+        while (null != factOrMythPhrase) {
+            cards.add(createFactOrMythCard(factOrMythPhrase));
+
+            factOrMythPhrase = cardSource.readLine();
+        }
+    }
+
+    private FactOrMythCard createFactOrMythCard(String factOrMythPhrase) {
+        return new FactOrMythCard(factOrMythPhrase.replaceAll("\\|", "\n"));
+    }
+
+    public List<FactOrMythCard> getCards() {
+        return Collections.unmodifiableList(cards);
+    }
+
 }

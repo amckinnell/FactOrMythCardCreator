@@ -5,8 +5,8 @@ package com.valuablecode.tool;
  */
 public interface CardFontConfiguration {
 
-	String getCardFontPath();
-	String getCardFontName();
-	float getCardFontSize();
+    String getCardFontPath();
+    String getCardFontName();
+    float getCardFontSize();
 
 }

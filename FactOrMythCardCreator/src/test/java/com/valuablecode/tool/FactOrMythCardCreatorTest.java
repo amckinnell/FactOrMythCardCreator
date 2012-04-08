@@ -15,52 +15,53 @@ import org.mockito.InOrder;
 import org.mockito.Mockito;
 
 public class FactOrMythCardCreatorTest {
-	
-	final FactOrMythCard card_1 = new FactOrMythCard("card.1");
-	final FactOrMythCard card_2 = new FactOrMythCard("card.2");
-	final FactOrMythCard card_3 = new FactOrMythCard("card.3");
-	
-	final FactOrMythCardProvider cardProvider = mock(FactOrMythCardProvider.class);
-	final FactOrMythLayoutService layoutService = mock(FactOrMythLayoutService.class);
-	
-	final FactOrMythCardCreator sut = new FactOrMythCardCreator(cardProvider, layoutService);
-	
-	final InOrder inOrder = Mockito.inOrder(layoutService);
 
-	
-	@Test public void
-	fail_when_there_are_no_fact_or_myth_cards() {
-		when(cardProvider.getCards()).thenReturn(Collections.<FactOrMythCard>emptyList());
-		
-		try {
-			sut.createCards();
-			fail("Expected to fail when there are no cards to create");
-		} catch (RuntimeException expected) {
-			assertThat(expected.getMessage(), containsString("No cards to create"));
-		}
-	}
+    final FactOrMythCard card_1 = new FactOrMythCard("card.1");
+    final FactOrMythCard card_2 = new FactOrMythCard("card.2");
+    final FactOrMythCard card_3 = new FactOrMythCard("card.3");
 
-	@Test public void
-	add_single_fact_or_myth_card_to_the_document() {
-		when(cardProvider.getCards()).thenReturn(singletonList(card_1));
+    final FactOrMythCardProvider cardProvider = mock(FactOrMythCardProvider.class);
+    final FactOrMythLayoutService layoutService = mock(FactOrMythLayoutService.class);
 
-		sut.createCards();
-		
-		inOrder.verify(layoutService).addCard(card_1);
-		inOrder.verify(layoutService).complete();
-	}
+    final FactOrMythCardCreator sut = new FactOrMythCardCreator(cardProvider, layoutService);
 
-	@Test public void
-	add_multiple_fact_or_myth_card_to_the_document() {
-		when(cardProvider.getCards()).thenReturn(asList(card_1, card_2, card_3));
+    final InOrder inOrder = Mockito.inOrder(layoutService);
 
-		sut.createCards();
-		
-		inOrder.verify(layoutService).addCard(card_1);
-		inOrder.verify(layoutService).addCard(card_2);
-		inOrder.verify(layoutService).addCard(card_3);
 
-		inOrder.verify(layoutService).complete();
-	}
+    @Test public void
+    fail_when_there_are_no_fact_or_myth_cards() {
+        when(cardProvider.getCards()).thenReturn(Collections.<FactOrMythCard>emptyList());
+
+        try {
+            sut.createCards();
+            fail("Expected to fail when there are no cards to create");
+        } catch (RuntimeException expected) {
+            assertThat(expected.getMessage(), containsString("No cards to create"));
+        }
+    }
+
+    @Test public void
+    add_single_fact_or_myth_card_to_the_document() {
+        when(cardProvider.getCards()).thenReturn(singletonList(card_1));
+
+        sut.createCards();
+
+        inOrder.verify(layoutService).addCard(card_1);
+        inOrder.verify(layoutService).complete();
+    }
+
+    @Test public void
+    add_multiple_fact_or_myth_card_to_the_document() {
+        when(cardProvider.getCards()).thenReturn(asList(card_1, card_2, card_3));
+
+        sut.createCards();
+
+        inOrder.verify(layoutService).addCard(card_1);
+        inOrder.verify(layoutService).addCard(card_2);
+        inOrder.verify(layoutService).addCard(card_3);
+
+        inOrder.verify(layoutService).complete();
+    }
 
 }
+

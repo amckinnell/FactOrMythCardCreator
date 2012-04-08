@@ -10,31 +10,31 @@ import com.itextpdf.text.Rectangle;
  */
 public class IndexCardPageLayout extends BasePageLayout {
 
-	// Index cards are 3 by 5 inches.
-	private final static Rectangle pageSize = new Rectangle(inchesToPoints(5), inchesToPoints(3));
+    // Index cards are 3 by 5 inches.
+    private final static Rectangle pageSize = new Rectangle(inchesToPoints(5), inchesToPoints(3));
 
-	private static final BaseColor GRAY = new BaseColor(190, 190, 190);
+    private static final BaseColor GRAY = new BaseColor(190, 190, 190);
 
-	
-	public int getCardsPerPage() {
-		return 1;
-	}
 
-	public int getColumnsPerPage() {
-		return 1;
-	}
+    public int getCardsPerPage() {
+        return 1;
+    }
 
-	public Rectangle getPageSize() {
-		return pageSize;
-	}
+    public int getColumnsPerPage() {
+        return 1;
+    }
 
-	public int getBorder() {
-		return Rectangle.NO_BORDER;
-	}
+    public Rectangle getPageSize() {
+        return pageSize;
+    }
 
-	public BaseColor getBorderColor() {
-		return GRAY;
-	}
+    public int getBorder() {
+        return Rectangle.NO_BORDER;
+    }
 
+    public BaseColor getBorderColor() {
+        return GRAY;
+    }
 
 }
+

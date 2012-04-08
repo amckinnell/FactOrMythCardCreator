@@ -12,39 +12,40 @@ import com.valuablecode.tool.CardFormat;
  */
 public class ConfigurableCardFormat implements CardFormat {
 
-	// The safest choice is to embed the font in the PDF document.
-	private static final boolean EMBED_FONT_IN_DOCUMENT = true;
+    // The safest choice is to embed the font in the PDF document.
+    private static final boolean EMBED_FONT_IN_DOCUMENT = true;
 
-	private final CardFontConfiguration configuration;
+    private final CardFontConfiguration configuration;
 
-	private Font cardFont;
+    private Font cardFont;
 
 
-	public ConfigurableCardFormat(CardFontConfiguration configuration) {
-		this.configuration = configuration;
-	}
+    public ConfigurableCardFormat(CardFontConfiguration configuration) {
+        this.configuration = configuration;
+    }
 
-	public Font getFont() {
-		if (null == cardFont) {
-			cardFont = initializeCardFont();
-		}
+    public Font getFont() {
+        if (null == cardFont) {
+            cardFont = initializeCardFont();
+        }
 
-		return cardFont;
-	}
+        return cardFont;
+    }
 
-	private Font initializeCardFont() {
+    private Font initializeCardFont() {
         Font result = createFont();
 
         result.setSize(configuration.getCardFontSize());
         result.setStyle(Font.NORMAL);
 
-		return result;
-	}
+        return result;
+    }
 
-	private Font createFont() {
+    private Font createFont() {
         FontFactory.register(configuration.getCardFontPath());
 
-		return FontFactory.getFont(configuration.getCardFontName(), defaultEncoding, EMBED_FONT_IN_DOCUMENT);
-	}
+        return FontFactory.getFont(configuration.getCardFontName(), defaultEncoding, EMBED_FONT_IN_DOCUMENT);
+    }
 
 }
+

@@ -17,86 +17,87 @@ import com.valuablecode.tool.PageLayout;
 
 public class PdfFactOrMythDocument implements FactOrMythDocument {
 
-	// Values taken from the Fact or Myth configuration.
-	private final CardFormat cardFormat;
-	private final String outputFileName;
-	private final PageLayout pageLayout;
+    // Values taken from the Fact or Myth configuration.
+    private final CardFormat cardFormat;
+    private final String outputFileName;
+    private final PageLayout pageLayout;
 
-	// The underlying PDF document that we're writing to.
-	private Document document;
+    // The underlying PDF document that we're writing to.
+    private Document document;
 
-	// Used to control the card layout on the current page by defining a layout grid.
-	private PdfPTable pageTable;
+    // Used to control the card layout on the current page by defining a layout grid.
+    private PdfPTable pageTable;
 
 
-	public PdfFactOrMythDocument(FactOrMythConfiguration configuration) {
-		this.outputFileName = configuration.getOutputFileName();
-		this.pageLayout = configuration.getPageLayout();
-		this.cardFormat = configuration.getCardFormat();
+    public PdfFactOrMythDocument(FactOrMythConfiguration configuration) {
+        this.outputFileName = configuration.getOutputFileName();
+        this.pageLayout = configuration.getPageLayout();
+        this.cardFormat = configuration.getCardFormat();
 
-		initializePage();
-	}
+        initializePage();
+    }
 
-	public void close() {
-		document.close();
-	}
+    public void close() {
+        document.close();
+    }
 
-	public void emitPage() {
-		try {
-			document.add(pageTable);
-			document.newPage();
-		} catch (DocumentException e) {
-			throw new RuntimeException("Can't layout page", e);
-		}
+    public void emitPage() {
+        try {
+            document.add(pageTable);
+            document.newPage();
+        } catch (DocumentException e) {
+            throw new RuntimeException("Can't layout page", e);
+        }
 
-		initializePage();
-	}
+        initializePage();
+    }
 
-	private void initializePage() {
-		pageTable = new PdfPTable(pageLayout.getColumnsPerPage());
-		pageTable.setWidthPercentage(100f);
-	}
+    private void initializePage() {
+        pageTable = new PdfPTable(pageLayout.getColumnsPerPage());
+        pageTable.setWidthPercentage(100f);
+    }
 
-	public void addCard(FactOrMythCard card) {
-		guaranteeDocumentIsInitialized();
+    public void addCard(FactOrMythCard card) {
+        guaranteeDocumentIsInitialized();
 
-		pageTable.addCell(createCardLayoutFor(card));
-	}
+        pageTable.addCell(createCardLayoutFor(card));
+    }
 
-	private void guaranteeDocumentIsInitialized() {
-		if (null == document) {
-			document = initializeDocument();
+    private void guaranteeDocumentIsInitialized() {
+        if (null == document) {
+            document = initializeDocument();
 
-			document.open();
-		}
-	}
+            document.open();
+        }
+    }
 
-	private Document initializeDocument() {
-		Document document = new Document(pageLayout.getPageSize(), 0f, 0f, 0f, 0f);
+    private Document initializeDocument() {
+        Document document = new Document(pageLayout.getPageSize(), 0f, 0f, 0f, 0f);
 
-		try {
-			PdfWriter.getInstance(document, new FileOutputStream(outputFileName));
-		} catch (Exception e) {
-			throw new RuntimeException("Unable to initialize layout", e);
-		}
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(outputFileName));
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to initialize layout", e);
+        }
 
-		return document;
-	}
+        return document;
+    }
 
-	private PdfPCell createCardLayoutFor(FactOrMythCard card) {
-		PdfPCell result = new PdfPCell(new Phrase(card.getCardText(), cardFormat.getFont()));
+    private PdfPCell createCardLayoutFor(FactOrMythCard card) {
+        PdfPCell result = new PdfPCell(new Phrase(card.getCardText(), cardFormat.getFont()));
 
-		result.setBorder(pageLayout.getBorder());
-		result.setBorderColor(pageLayout.getBorderColor());
+        result.setBorder(pageLayout.getBorder());
+        result.setBorderColor(pageLayout.getBorderColor());
 
-		result.setHorizontalAlignment(Element.ALIGN_CENTER);
-		result.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        result.setHorizontalAlignment(Element.ALIGN_CENTER);
+        result.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		result.setFixedHeight(pageLayout.getCardHeight());
+        result.setFixedHeight(pageLayout.getCardHeight());
 
-		result.setLeading(0.0F, 1.25F);
+        result.setLeading(0.0F, 1.25F);
 
-		return result;
-	}
+        return result;
+    }
 
 }
+

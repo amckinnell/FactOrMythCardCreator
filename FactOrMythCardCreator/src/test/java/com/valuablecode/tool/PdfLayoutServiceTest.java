@@ -9,75 +9,76 @@ import static org.mockito.Mockito.verify;
 import org.junit.Test;
 
 public class PdfLayoutServiceTest {
-	
-	final FactOrMythCard card_1 = new FactOrMythCard("card.1");
-	final FactOrMythCard card_2 = new FactOrMythCard("card.2");
 
-	final FactOrMythDocument document = mock(FactOrMythDocument.class);
+    final FactOrMythCard card_1 = new FactOrMythCard("card.1");
+    final FactOrMythCard card_2 = new FactOrMythCard("card.2");
 
-	PageLayoutBuilder pageLayout;
+    final FactOrMythDocument document = mock(FactOrMythDocument.class);
 
-	FactOrMythLayoutService sut;
+    PageLayoutBuilder pageLayout;
 
-	@Test
-	public void adds_each_card_to_the_document() {
-		pageLayout = aPageLayout().withCardsPerPage(1).withColumnsPerPage(1);
-		sut = createFactOrMythLayout(pageLayout);
+    FactOrMythLayoutService sut;
 
-		sut.addCard(card_1);
+    @Test public void
+    adds_each_card_to_the_document() {
+        pageLayout = aPageLayout().withCardsPerPage(1).withColumnsPerPage(1);
+        sut = createFactOrMythLayout(pageLayout);
 
-		verify(document).addCard(card_1);
-	}
-	
-	@Test
-	public void emits_page_when_page_is_complete() {
-		pageLayout = aPageLayout().withCardsPerPage(1).withColumnsPerPage(1);
-		sut = createFactOrMythLayout(pageLayout);
+        sut.addCard(card_1);
 
-		sut.addCard(card_1);
+        verify(document).addCard(card_1);
+    }
 
-		verify(document).emitPage();
-	}
-	
-	@Test
-	public void adds__blank_cards_when_column_is_incomplete() {
-		pageLayout = aPageLayout().withCardsPerPage(6).withColumnsPerPage(3);
-		sut = createFactOrMythLayout(pageLayout);
+    @Test public void
+    emits_page_when_page_is_complete() {
+        pageLayout = aPageLayout().withCardsPerPage(1).withColumnsPerPage(1);
+        sut = createFactOrMythLayout(pageLayout);
 
-		sut.addCard(card_1);
-		sut.complete();
+        sut.addCard(card_1);
 
-		verify(document, times(2)).addCard(FactOrMythCard.aBlankCard);
-		verify(document).emitPage();
-	}
-	
-	@Test
-	public void does_not_add_empty_card_when_colum_is_complete() {
-		pageLayout = aPageLayout().withCardsPerPage(6).withColumnsPerPage(2);
-		sut = createFactOrMythLayout(pageLayout);
+        verify(document).emitPage();
+    }
 
-		sut.addCard(card_1);
-		sut.addCard(card_2);
-		sut.complete();
+    @Test public void
+	adds__blank_cards_when_column_is_incomplete() {
+        pageLayout = aPageLayout().withCardsPerPage(6).withColumnsPerPage(3);
+        sut = createFactOrMythLayout(pageLayout);
 
-		verify(document, never()).addCard(FactOrMythCard.aBlankCard);
-	}
+        sut.addCard(card_1);
+        sut.complete();
 
-	@Test
-	public void does_nothing_when_page_is_complete() {
-		pageLayout = aPageLayout().withCardsPerPage(2).withColumnsPerPage(2);
-		sut = createFactOrMythLayout(pageLayout);
+        verify(document, times(2)).addCard(FactOrMythCard.aBlankCard);
+        verify(document).emitPage();
+    }
 
-		sut.addCard(card_1);
-		sut.addCard(card_2);
-		sut.complete();
+    @Test public void
+    does_not_add_empty_card_when_colum_is_complete() {
+        pageLayout = aPageLayout().withCardsPerPage(6).withColumnsPerPage(2);
+        sut = createFactOrMythLayout(pageLayout);
 
-		verify(document, never()).addCard(FactOrMythCard.aBlankCard);
-		verify(document, times(1)).emitPage();
-	}
-	
-	private PdfLayoutService createFactOrMythLayout(PageLayoutBuilder pageLayout) {
-		return new PdfLayoutService(pageLayout.build(), document);
-	}
-	
+        sut.addCard(card_1);
+        sut.addCard(card_2);
+        sut.complete();
+
+        verify(document, never()).addCard(FactOrMythCard.aBlankCard);
+    }
+
+    @Test public void
+    does_nothing_when_page_is_complete() {
+        pageLayout = aPageLayout().withCardsPerPage(2).withColumnsPerPage(2);
+        sut = createFactOrMythLayout(pageLayout);
+
+        sut.addCard(card_1);
+        sut.addCard(card_2);
+        sut.complete();
+
+        verify(document, never()).addCard(FactOrMythCard.aBlankCard);
+        verify(document, times(1)).emitPage();
+    }
+
+    private PdfLayoutService createFactOrMythLayout(PageLayoutBuilder pageLayout) {
+        return new PdfLayoutService(pageLayout.build(), document);
+    }
+
 }
+

@@ -4,6 +4,6 @@ import com.itextpdf.text.Font;
 
 public interface CardFormat {
 
-	Font getFont();
+    Font getFont();
 
 }

@@ -7,11 +7,11 @@ import org.junit.Test;
 
 public class IndexCardPageLayoutTest {
 
-	@Test public void 
-	card_height_same_as_page_height() {
-		IndexCardPageLayout sut = new IndexCardPageLayout();
+    @Test public void
+    card_height_same_as_page_height() {
+        IndexCardPageLayout sut = new IndexCardPageLayout();
 
-		assertThat(sut.getCardHeight(), equalTo(sut.getPageSize().getHeight()));
-	}
-	
+        assertThat(sut.getCardHeight(), equalTo(sut.getPageSize().getHeight()));
+    }
+
 }

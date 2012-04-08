@@ -4,72 +4,73 @@ import com.valuablecode.tool.itext.PdfFactOrMythDocument;
 
 
 /**
- * Allows cards to be added to a PDF layout suitable for printing. 
+ * Allows cards to be added to a PDF layout suitable for printing.
  */
 public class PdfLayoutService implements FactOrMythLayoutService {
-	
-	private final PageLayout pageLayout;
-	private final FactOrMythDocument document;
 
-	// The count of cards that we've added to the current page.
-	private int cardCount = 0;
-	
+    private final PageLayout pageLayout;
+    private final FactOrMythDocument document;
 
-	public PdfLayoutService(FactOrMythConfiguration configuration) {
-		this(configuration.getPageLayout(), new PdfFactOrMythDocument(configuration));
-	}
-	
-	public PdfLayoutService(PageLayout pageLayout, FactOrMythDocument pdfDocument) {
-		this.pageLayout = pageLayout;
-		this.document = pdfDocument;
-	}
+    // The count of cards that we've added to the current page.
+    private int cardCount = 0;
 
-	public void addCard(FactOrMythCard card) {
-		document.addCard(card);
-		cardCount += 1;
-		
-		if (isCompletePage()) {
-			document.emitPage();
-			cardCount = 0;
-		}
-	}
 
-	private boolean isCompletePage() {
-		return pageLayout.getCardsPerPage() == cardCount;
-	}
+    public PdfLayoutService(FactOrMythConfiguration configuration) {
+        this(configuration.getPageLayout(), new PdfFactOrMythDocument(configuration));
+    }
 
-	public void complete() {
-		handleIncompletePage();
-		
-		document.close();
-	}
+    public PdfLayoutService(PageLayout pageLayout, FactOrMythDocument pdfDocument) {
+        this.pageLayout = pageLayout;
+        this.document = pdfDocument;
+    }
 
-	private void handleIncompletePage() {
-		if (isEmptyPage()) return;
-		
-		handleIncompleteColumn();
+    public void addCard(FactOrMythCard card) {
+        document.addCard(card);
+        cardCount += 1;
 
-		document.emitPage();
-	}
+        if (isCompletePage()) {
+            document.emitPage();
+            cardCount = 0;
+        }
+    }
 
-	private boolean isEmptyPage() {
-		return 0 == cardCount;
-	}
+    private boolean isCompletePage() {
+        return pageLayout.getCardsPerPage() == cardCount;
+    }
 
-	private void handleIncompleteColumn() {
-		if (isCompleteColumn()) return;
+    public void complete() {
+        handleIncompletePage();
 
-		for (int i = 0; i < getMissingCoumnCount(); i++) {
-			document.addCard(FactOrMythCard.aBlankCard);
-		}
-	}
+        document.close();
+    }
 
-	private int getMissingCoumnCount() {
-		return pageLayout.getColumnsPerPage() - (cardCount % pageLayout.getColumnsPerPage());
-	}
+    private void handleIncompletePage() {
+        if (isEmptyPage()) return;
 
-	private boolean isCompleteColumn() {
-		return 0 == cardCount % pageLayout.getColumnsPerPage();
-	}
+        handleIncompleteColumn();
+
+        document.emitPage();
+    }
+
+    private boolean isEmptyPage() {
+        return 0 == cardCount;
+    }
+
+    private void handleIncompleteColumn() {
+        if (isCompleteColumn()) return;
+
+        for (int i = 0; i < getMissingCoumnCount(); i++) {
+            document.addCard(FactOrMythCard.aBlankCard);
+        }
+    }
+
+    private int getMissingCoumnCount() {
+        return pageLayout.getColumnsPerPage() - (cardCount % pageLayout.getColumnsPerPage());
+    }
+
+    private boolean isCompleteColumn() {
+        return 0 == cardCount % pageLayout.getColumnsPerPage();
+    }
 
 }
+
