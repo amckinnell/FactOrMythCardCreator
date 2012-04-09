@@ -24,16 +24,12 @@ public class PropertyFileConfigurationTest {
 
     @Test public void
     configures_the_card_source_file_name() {
-        when(configuration.getString("cardSourceFileName")).thenReturn("CARD SOURCE FILE NAME VALUE");
-
-        assertThat(sut.getCardSourceFileName(), equalTo("CARD SOURCE FILE NAME VALUE"));
+        assertThat(sut.getCardSourceFileName(), equalTo("/directory/tag.txt"));
     }
 
     @Test public void
     configures_the_output_file_name() {
-        when(configuration.getString("outputFileName")).thenReturn("OUTPUT FILE NAME VALUE");
-
-        assertThat(sut.getOutputFileName(), equalTo("OUTPUT FILE NAME VALUE"));
+        assertThat(sut.getOutputFileName(), equalTo("/directory/tag.pdf"));
     }
 
     @Test public void

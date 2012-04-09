@@ -2,6 +2,10 @@ package com.valuablecode.tool;
 
 import static com.valuablecode.tool.LetterPageLayout.aLetterPageLayout;
 import static com.valuablecode.tool.LetterPageLayout.aLetterPageLayoutWithBorders;
+import static java.text.MessageFormat.format;
+import static org.apache.commons.io.FilenameUtils.getBaseName;
+import static org.apache.commons.io.FilenameUtils.getPath;
+import static org.apache.commons.io.FilenameUtils.getPrefix;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -15,13 +19,10 @@ import com.valuablecode.tool.itext.ConfigurableCardFormat;
 public class PropertyFileConfiguration implements FactOrMythConfiguration, CardFontConfiguration {
 
     // Key definitions for the configuration property file.
-    private static final String CARD_SOURCE_FILE_NAME_PROPERTY_KEY = "cardSourceFileName";
-    private static final String OUTPUT_FILE_NAME_PROPERTY_KEY = "outputFileName";
-    private static final String PAGE_LAYOUT_PROPERTY_KEY = "pageLayout";
-
     private static final String FONT_PATH_PROPERTY_KEY = "font.fileName";
     private static final String FONT_NAME_PROPERTY_KEY = "font.name";
     private static final String FONT_SIZE_PROPERTY_KEY = "font.size";
+    private static final String PAGE_LAYOUT_PROPERTY_KEY = "pageLayout";
 
     // Normalised values for the page layout property. Values read from the property file are normalised by
     // trimming whitespace, replacing whitespace with an underscore, and converting the value to all upper case.
@@ -48,11 +49,16 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
     }
 
     public String getCardSourceFileName() {
-        return configuration.getString(CARD_SOURCE_FILE_NAME_PROPERTY_KEY);
+        return getSiblingFileNameWithExtension("txt");
     }
 
     public String getOutputFileName() {
-        return configuration.getString(OUTPUT_FILE_NAME_PROPERTY_KEY);
+        return getSiblingFileNameWithExtension("pdf");
+    }
+
+    private String getSiblingFileNameWithExtension(String extension) {
+        return format("{0}{1}{2}.{3}", getPrefix(propertyFileName), getPath(propertyFileName),
+                getBaseName(propertyFileName), extension);
     }
 
     public PageLayout getPageLayout() {
