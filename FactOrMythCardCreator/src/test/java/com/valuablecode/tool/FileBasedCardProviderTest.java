@@ -37,6 +37,15 @@ public class FileBasedCardProviderTest {
     }
 
     @Test public void
+    skips_comments() {
+        FileBasedCardProvider sut = createFileBasedCardProvider("# Comment\nFirst Card\n# Another comment");
+        List<FactOrMythCard> cards = sut.getCards();
+
+        assertThat(cards.size(), equalTo(1));
+        assertThat(cards.get(0).getCardText(), equalTo("First Card"));
+    }
+
+    @Test public void
     creates_multiline_cards() {
         FileBasedCardProvider sut = createFileBasedCardProvider("Title Card\nFirst Card|Extra Line|Extra Extra Line\nSecond Card");
         List<FactOrMythCard> cards = sut.getCards();

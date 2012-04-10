@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class FileBasedCardProvider implements FactOrMythCardProvider {
 
+    private static final String COMMENT_PREFIX = "#";
+
     private final List<FactOrMythCard> cards = new ArrayList<FactOrMythCard>();
 
 
@@ -45,10 +47,16 @@ public class FileBasedCardProvider implements FactOrMythCardProvider {
         String factOrMythPhrase = cardSource.readLine();
 
         while (null != factOrMythPhrase) {
-            cards.add(createFactOrMythCard(factOrMythPhrase));
+            if (!isComment(factOrMythPhrase)) {
+                cards.add(createFactOrMythCard(factOrMythPhrase));
+            }
 
             factOrMythPhrase = cardSource.readLine();
         }
+    }
+
+    private boolean isComment(String factOrMythPhrase) {
+        return factOrMythPhrase.startsWith(COMMENT_PREFIX);
     }
 
     private FactOrMythCard createFactOrMythCard(String factOrMythPhrase) {
