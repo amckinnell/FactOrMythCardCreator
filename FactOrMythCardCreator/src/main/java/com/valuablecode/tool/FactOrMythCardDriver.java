@@ -1,5 +1,7 @@
 package com.valuablecode.tool;
 
+import static java.text.MessageFormat.format;
+
 public class FactOrMythCardDriver {
 
     public static void main(String[] args) {
@@ -11,6 +13,8 @@ public class FactOrMythCardDriver {
         FactOrMythCardCreator cardCreator = new FactOrMythCardCreator(cardProvider, layoutService);
 
         cardCreator.createCards();
+
+        showResult(configuration);
     }
 
     private static FactOrMythConfiguration getConfiguration(String[] args) {
@@ -24,10 +28,14 @@ public class FactOrMythCardDriver {
         }
 
         return args[0];
-}
+    }
 
-private static void showUsage() {
-    System.out.println("Error: please specify a single configuration file name");
-}
+    private static void showUsage() {
+        System.out.println("Error: please specify a single configuration file name");
+    }
+
+    private static void showResult(FactOrMythConfiguration configuration) {
+        System.out.println(format("Created: {0}", configuration.getOutputFileName()));
+    }
 
 }
