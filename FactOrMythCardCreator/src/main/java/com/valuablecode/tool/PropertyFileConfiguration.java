@@ -26,7 +26,7 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
 
     // Normalised values for the page layout property. Values read from the property file are normalised by
     // trimming whitespace, replacing whitespace with an underscore, and converting the value to all upper case.
-    private enum SupportedPageLayouts { BINGO, INDEX_CARD, LETTER, LETTER_WITH_BORDERS }
+    private enum SupportedPageLayouts { BINGO, CUSTOM, INDEX_CARD, LETTER, LETTER_WITH_BORDERS }
 
     private final Configuration configuration;
     private final String propertyFileName;
@@ -65,6 +65,9 @@ public class PropertyFileConfiguration implements FactOrMythConfiguration, CardF
         switch (getSupportedPageLayout()) {
             case BINGO:
                 return new BingoPageLayout();
+
+            case CUSTOM:
+                return new CustomPageLayout();
 
             case INDEX_CARD:
                 return new IndexCardPageLayout();
