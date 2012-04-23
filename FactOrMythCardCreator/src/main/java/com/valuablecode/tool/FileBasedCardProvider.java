@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class FileBasedCardProvider implements FactOrMythCardProvider {
 
-    private static final String COMMENT_PREFIX = "^[#-/].*";
+    private static final String COMMENT_PREFIX = "^[#/-].*";
 
     private final List<FactOrMythCard> cards = new ArrayList<FactOrMythCard>();
 

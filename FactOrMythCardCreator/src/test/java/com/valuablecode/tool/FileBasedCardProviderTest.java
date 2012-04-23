@@ -38,11 +38,11 @@ public class FileBasedCardProviderTest {
 
     @Test public void
     skips_comments() {
-        FileBasedCardProvider sut = createFileBasedCardProvider("# Comment\nFirst Card\n-- Comment\n// Comment");
+        FileBasedCardProvider sut = createFileBasedCardProvider("# Comment\n$First Card\n-- Comment\n// Comment");
         List<FactOrMythCard> cards = sut.getCards();
 
         assertThat(cards.size(), equalTo(1));
-        assertThat(cards.get(0).getCardText(), equalTo("First Card"));
+        assertThat(cards.get(0).getCardText(), equalTo("$First Card"));
     }
 
     @Test public void
