@@ -19,11 +19,11 @@ public class CustomPageLayout extends BasePageLayout {
 
 
     public int getCardsPerPage() {
-	    return 6;
+	    return 18;
 	}
 
     public int getColumnsPerPage() {
-        return 2;
+        return 3;
     }
 
     public Rectangle getPageSize() {
