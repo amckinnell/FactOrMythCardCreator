@@ -89,6 +89,8 @@ public class PdfFactOrMythDocument implements FactOrMythDocument {
         result.setBorder(pageLayout.getBorder());
         result.setBorderColor(pageLayout.getBorderColor());
 
+        result.setBackgroundColor(cardFormat.getBackgroundColor());
+
         result.setHorizontalAlignment(Element.ALIGN_CENTER);
         result.setVerticalAlignment(Element.ALIGN_MIDDLE);
 

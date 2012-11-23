@@ -2,6 +2,7 @@ package com.valuablecode.tool.itext;
 
 import static com.itextpdf.text.FontFactory.defaultEncoding;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.valuablecode.tool.CardFontConfiguration;
@@ -22,6 +23,10 @@ public class ConfigurableCardFormat implements CardFormat {
 
     public ConfigurableCardFormat(CardFontConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public BaseColor getBackgroundColor() {
+        return BaseColor.WHITE;
     }
 
     public Font getFont() {
