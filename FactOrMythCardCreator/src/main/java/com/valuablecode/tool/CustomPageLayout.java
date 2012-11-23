@@ -13,13 +13,15 @@ import com.itextpdf.text.Rectangle;
 public class CustomPageLayout extends BasePageLayout {
 
     // US Letter pages are 8.5 by 11 inches. This orientation is landscape.
-    private final static Rectangle pageSize = new Rectangle(inchesToPoints(11.5f), inchesToPoints(8f));
+    private final static float margin = 0.25f;
+    private final static Rectangle pageSize = new Rectangle(inchesToPoints(11.5f - (margin * 2)),
+            inchesToPoints(8f - (margin * 2)));
 
     private static final BaseColor DIM_GRAY = new BaseColor(105, 105, 105);
 
 
     public int getCardsPerPage() {
-	    return 18;
+	    return 9;
 	}
 
     public int getColumnsPerPage() {
