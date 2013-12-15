@@ -26,7 +26,12 @@ public class ConfigurableCardFormat implements CardFormat {
     }
 
     public BaseColor getBackgroundColor() {
-        return BaseColor.WHITE;
+        // new BaseColor(102, 255, 102); Light Green
+        // new BaseColor(255, 102, 102); Light Red
+        // new BaseColor(255, 255, 102); Light Yellow
+        // new BaseColor(255, 255, 255); White
+
+        return new BaseColor(255, 255, 255);
     }
 
     public Font getFont() {
